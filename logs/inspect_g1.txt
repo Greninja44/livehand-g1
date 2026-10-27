@@ -1,0 +1,66 @@
+model: /home/batman/robotics/chess2bot/models/mujoco_menagerie/unitree_g1/scene.xml
+nbody=31 njnt=30 nu=29 nq=36 nv=35 dt=0.002
+mesh=35 tex=2  keyframes=['stand']
+
+JOINTS (name, type, limited, range[rad]):
+   0 floating_base_joint              FREE   
+   1 left_hip_pitch_joint             HINGE  [-2.531, +2.880]
+   2 left_hip_roll_joint              HINGE  [-0.524, +2.967]
+   3 left_hip_yaw_joint               HINGE  [-2.758, +2.758]
+   4 left_knee_joint                  HINGE  [-0.087, +2.880]
+   5 left_ankle_pitch_joint           HINGE  [-0.873, +0.524]
+   6 left_ankle_roll_joint            HINGE  [-0.262, +0.262]
+   7 right_hip_pitch_joint            HINGE  [-2.531, +2.880]
+   8 right_hip_roll_joint             HINGE  [-2.967, +0.524]
+   9 right_hip_yaw_joint              HINGE  [-2.758, +2.758]
+  10 right_knee_joint                 HINGE  [-0.087, +2.880]
+  11 right_ankle_pitch_joint          HINGE  [-0.873, +0.524]
+  12 right_ankle_roll_joint           HINGE  [-0.262, +0.262]
+  13 waist_yaw_joint                  HINGE  [-2.618, +2.618]
+  14 waist_roll_joint                 HINGE  [-0.520, +0.520]
+  15 waist_pitch_joint                HINGE  [-0.520, +0.520]
+  16 left_shoulder_pitch_joint        HINGE  [-3.089, +2.670]
+  17 left_shoulder_roll_joint         HINGE  [-1.588, +2.252]
+  18 left_shoulder_yaw_joint          HINGE  [-2.618, +2.618]
+  19 left_elbow_joint                 HINGE  [-1.047, +2.094]
+  20 left_wrist_roll_joint            HINGE  [-1.972, +1.972]
+  21 left_wrist_pitch_joint           HINGE  [-1.614, +1.614]
+  22 left_wrist_yaw_joint             HINGE  [-1.614, +1.614]
+  23 right_shoulder_pitch_joint       HINGE  [-3.089, +2.670]
+  24 right_shoulder_roll_joint        HINGE  [-2.252, +1.588]
+  25 right_shoulder_yaw_joint         HINGE  [-2.618, +2.618]
+  26 right_elbow_joint                HINGE  [-1.047, +2.094]
+  27 right_wrist_roll_joint           HINGE  [-1.972, +1.972]
+  28 right_wrist_pitch_joint          HINGE  [-1.614, +1.614]
+  29 right_wrist_yaw_joint            HINGE  [-1.614, +1.614]
+
+ACTUATORS (name -> joint, ctrlrange, forcerange, kp/kv):
+   0 left_hip_pitch_joint             -> left_hip_pitch_joint           position ctrl=[-2.531, +2.880] force=unlimited kp=500.0 kv=10.3
+   1 left_hip_roll_joint              -> left_hip_roll_joint            position ctrl=[-0.524, +2.967] force=unlimited kp=500.0 kv=15.8
+   2 left_hip_yaw_joint               -> left_hip_yaw_joint             position ctrl=[-2.758, +2.758] force=unlimited kp=500.0 kv=5.8
+   3 left_knee_joint                  -> left_knee_joint                position ctrl=[-0.087, +2.880] force=unlimited kp=500.0 kv=9.1
+   4 left_ankle_pitch_joint           -> left_ankle_pitch_joint         position ctrl=[-0.873, +0.524] force=unlimited kp=500.0 kv=4.9
+   5 left_ankle_roll_joint            -> left_ankle_roll_joint          position ctrl=[-0.262, +0.262] force=unlimited kp=500.0 kv=4.5
+   6 right_hip_pitch_joint            -> right_hip_pitch_joint          position ctrl=[-2.531, +2.880] force=unlimited kp=500.0 kv=10.3
+   7 right_hip_roll_joint             -> right_hip_roll_joint           position ctrl=[-2.967, +0.524] force=unlimited kp=500.0 kv=15.8
+   8 right_hip_yaw_joint              -> right_hip_yaw_joint            position ctrl=[-2.758, +2.758] force=unlimited kp=500.0 kv=5.8
+   9 right_knee_joint                 -> right_knee_joint               position ctrl=[-0.087, +2.880] force=unlimited kp=500.0 kv=9.1
+  10 right_ankle_pitch_joint          -> right_ankle_pitch_joint        position ctrl=[-0.873, +0.524] force=unlimited kp=500.0 kv=4.9
+  11 right_ankle_roll_joint           -> right_ankle_roll_joint         position ctrl=[-0.262, +0.262] force=unlimited kp=500.0 kv=4.5
+  12 waist_yaw_joint                  -> waist_yaw_joint                position ctrl=[-2.618, +2.618] force=unlimited kp=500.0 kv=10.3
+  13 waist_roll_joint                 -> waist_roll_joint               position ctrl=[-0.520, +0.520] force=unlimited kp=500.0 kv=16.2
+  14 waist_pitch_joint                -> waist_pitch_joint              position ctrl=[-0.520, +0.520] force=unlimited kp=500.0 kv=9.3
+  15 left_shoulder_pitch_joint        -> left_shoulder_pitch_joint      position ctrl=[-3.089, +2.670] force=unlimited kp=500.0 kv=10.8
+  16 left_shoulder_roll_joint         -> left_shoulder_roll_joint       position ctrl=[-1.588, +2.252] force=unlimited kp=500.0 kv=10.0
+  17 left_shoulder_yaw_joint          -> left_shoulder_yaw_joint        position ctrl=[-2.618, +2.618] force=unlimited kp=500.0 kv=7.3
+  18 left_elbow_joint                 -> left_elbow_joint               position ctrl=[-1.047, +2.094] force=unlimited kp=500.0 kv=7.1
+  19 left_wrist_roll_joint            -> left_wrist_roll_joint          position ctrl=[-1.972, +1.972] force=unlimited kp=500.0 kv=4.6
+  20 left_wrist_pitch_joint           -> left_wrist_pitch_joint         position ctrl=[-1.614, +1.614] force=unlimited kp=500.0 kv=5.0
+  21 left_wrist_yaw_joint             -> left_wrist_yaw_joint           position ctrl=[-1.614, +1.614] force=unlimited kp=500.0 kv=4.7
+  22 right_shoulder_pitch_joint       -> right_shoulder_pitch_joint     position ctrl=[-3.089, +2.670] force=unlimited kp=500.0 kv=10.8
+  23 right_shoulder_roll_joint        -> right_shoulder_roll_joint      position ctrl=[-2.252, +1.588] force=unlimited kp=500.0 kv=10.0
+  24 right_shoulder_yaw_joint         -> right_shoulder_yaw_joint       position ctrl=[-2.618, +2.618] force=unlimited kp=500.0 kv=7.3
+  25 right_elbow_joint                -> right_elbow_joint              position ctrl=[-1.047, +2.094] force=unlimited kp=500.0 kv=7.1
+  26 right_wrist_roll_joint           -> right_wrist_roll_joint         position ctrl=[-1.972, +1.972] force=unlimited kp=500.0 kv=4.6
+  27 right_wrist_pitch_joint          -> right_wrist_pitch_joint        position ctrl=[-1.614, +1.614] force=unlimited kp=500.0 kv=5.0
+  28 right_wrist_yaw_joint            -> right_wrist_yaw_joint          position ctrl=[-1.614, +1.614] force=unlimited kp=500.0 kv=4.7

@@ -1,0 +1,9 @@
+
+
+
+model path : /home/batman/robotics/chess2bot/models/mujoco_menagerie/unitree_g1/scene_with_hands.xml
+bodies=45 joints=44 actuators=43 timestep=0.002s
+MuJoCo 3.17.0
+wall=  2.0s sim_time=  1.30s pelvis_z=0.792
+wall=  4.0s sim_time=  2.62s pelvis_z=0.792
+viewer closed normally; final sim_time=3.93s

@@ -1,0 +1,21 @@
+=== 
+model=/home/batman/robotics/chess2bot/models/mujoco_menagerie/unitree_g1/scene.xml
+start height z=0.790  nu=29  using_keyframe_ctrl=True
+steps=2500  sim_time=5.00s  final pelvis z=0.792 (min 0.790)  upright=1.000  max|qvel|=0.000
+finite state: PASS
+standing at end (z>0.6*start, upright>0.9): PASS
+exit=0
+=== --zero-ctrl
+model=/home/batman/robotics/chess2bot/models/mujoco_menagerie/unitree_g1/scene.xml
+start height z=0.790  nu=29  using_keyframe_ctrl=False
+steps=2500  sim_time=5.00s  final pelvis z=0.792 (min 0.790)  upright=1.000  max|qvel|=0.006
+finite state: PASS
+standing at end (z>0.6*start, upright>0.9): PASS
+exit=0
+=== --model models/mujoco_menagerie/unitree_g1/scene_with_hands.xml
+model=models/mujoco_menagerie/unitree_g1/scene_with_hands.xml
+start height z=0.790  nu=43  using_keyframe_ctrl=True
+steps=2500  sim_time=5.00s  final pelvis z=0.792 (min 0.790)  upright=1.000  max|qvel|=0.000
+finite state: PASS
+standing at end (z>0.6*start, upright>0.9): PASS
+exit=0

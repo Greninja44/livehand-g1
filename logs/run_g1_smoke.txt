@@ -1,0 +1,10 @@
+Failed to load plugin 'libdecor-gtk.so': failed to init
+No plugins found, falling back on no decorations
+model path : /home/batman/robotics/chess2bot/models/mujoco_menagerie/unitree_g1/scene.xml
+bodies=31 joints=30 actuators=29 timestep=0.002s
+MuJoCo 3.17.0
+wall=  2.0s sim_time=  1.28s pelvis_z=0.792
+wall=  4.0s sim_time=  2.50s pelvis_z=0.792
+wall=  6.0s sim_time=  3.73s pelvis_z=0.792
+wall=  8.0s sim_time=  4.99s pelvis_z=0.792
+viewer closed normally; final sim_time=6.28s
