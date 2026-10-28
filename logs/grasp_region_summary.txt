@@ -1,0 +1,63 @@
+Grasp region map (scripted baseline grasp, fixed targets; only the pawn pose varies)
+
+trials: 75  valid: 75  invalid_initial_clearance (excluded): 0
+valid-trial success: 73/75 = 97.3%
+categories: success=73, hold_failure=2, lift_failure=0, grasp_failure=0, sim_error=0, invalid_initial_clearance=0
+
+Legend: S success, h hold_failure, l lift_failure, g grasp_failure, E sim_error, x invalid start
+Axes: columns = dx (mm, along fingers/forward), rows = dy (mm, along palm normal/toward midline)
+
+yaw = -30 deg   (success 25/25)
+  dy\dx    -6    -3    +0    +3    +6
+     +6     S     S     S     S     S
+     +3     S     S     S     S     S
+     +0     S     S     S     S     S
+     -3     S     S     S     S     S
+     -6     S     S     S     S     S
+
+yaw = 0 deg   (success 24/25)
+  dy\dx    -6    -3    +0    +3    +6
+     +6     S     S     h     S     S
+     +3     S     S     S     S     S
+     +0     S     S     S     S     S
+     -3     S     S     S     S     S
+     -6     S     S     S     S     S
+
+yaw = 30 deg   (success 24/25)
+  dy\dx    -6    -3    +0    +3    +6
+     +6     S     S     h     S     S
+     +3     S     S     S     S     S
+     +0     S     S     S     S     S
+     -3     S     S     S     S     S
+     -6     S     S     S     S     S
+
+Success rate by position (all yaws, valid trials only):
+  dx=-6,dy=-6      3/3
+  dx=-6,dy=-3      3/3
+  dx=-6,dy=0       3/3
+  dx=-6,dy=3       3/3
+  dx=-6,dy=6       3/3
+  dx=-3,dy=-6      3/3
+  dx=-3,dy=-3      3/3
+  dx=-3,dy=0       3/3
+  dx=-3,dy=3       3/3
+  dx=-3,dy=6       3/3
+  dx=0,dy=-6       3/3
+  dx=0,dy=-3       3/3
+  dx=0,dy=0        3/3
+  dx=0,dy=3        3/3
+  dx=0,dy=6        1/3
+  dx=3,dy=-6       3/3
+  dx=3,dy=-3       3/3
+  dx=3,dy=0        3/3
+  dx=3,dy=3        3/3
+  dx=3,dy=6        3/3
+  dx=6,dy=-6       3/3
+  dx=6,dy=-3       3/3
+  dx=6,dy=0        3/3
+  dx=6,dy=3        3/3
+  dx=6,dy=6        3/3
+
+By yaw: -30deg 25/25; 0deg 24/25; 30deg 24/25
+
+Only configurations listed above were tested; nothing is claimed outside the tested ranges (dx -6..6 mm, dy -6..6 mm, yaw -30..30 deg).

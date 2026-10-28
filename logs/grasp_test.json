@@ -57,6 +57,11 @@
       0,
       0
     ],
+    "pawn_offset_mm": [
+      0.0,
+      0.0
+    ],
+    "pawn_yaw_deg": 0.0,
     "table_top_hand_z": -0.047,
     "grasp_world_xy": [
       0.3,
@@ -201,7 +206,19 @@
       "right_hand_index_0_link": 0.03080729436923648,
       "right_hand_index_1_link": 0.03965240952598049
     },
-    "sim_time": 4.999999999999671
+    "sim_time": 4.999999999999671,
+    "invalid_initial_clearance": false,
+    "peak_z": 0.9131869775507737,
+    "peak_rise": 0.05331413016222186,
+    "pawn_initial_world": [
+      0.29999999999999993,
+      -0.16,
+      0.8600000000000001
+    ],
+    "closure_hand_contacts": [
+      "right_hand_middle_0_link",
+      "right_hand_thumb_2_link"
+    ]
   },
   "negative_control": {
     "z_rest": 0.8598728473885519,
@@ -308,7 +325,16 @@
       "right_hand_index_0_link": 0.03080729436923648,
       "right_hand_index_1_link": 0.03965240952598049
     },
-    "sim_time": 4.999999999999671
+    "sim_time": 4.999999999999671,
+    "invalid_initial_clearance": false,
+    "peak_z": 0.8599607600000001,
+    "peak_rise": 8.791261144824869e-05,
+    "pawn_initial_world": [
+      0.29999999999999993,
+      -0.16,
+      0.8600000000000001
+    ],
+    "closure_hand_contacts": []
   },
   "determinism": {
     "runs": 3,

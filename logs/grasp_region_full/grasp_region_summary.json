@@ -1,0 +1,517 @@
+{
+  "config": {
+    "x_offsets_mm": [
+      -9.0,
+      -6.0,
+      -3.0,
+      0.0,
+      3.0,
+      6.0,
+      9.0
+    ],
+    "y_offsets_mm": [
+      -9.0,
+      -6.0,
+      -3.0,
+      0.0,
+      3.0,
+      6.0,
+      9.0
+    ],
+    "yaws_deg": [
+      -45.0,
+      -30.0,
+      -15.0,
+      0.0,
+      15.0,
+      30.0,
+      45.0
+    ],
+    "repeats": 1,
+    "seed": 0,
+    "shuffle": false,
+    "min_clearance_mm": 2.0,
+    "grasp_config": {
+      "finger_close": [
+        -0.226,
+        -0.902,
+        -0.924,
+        0.154,
+        0.724,
+        1.095,
+        1.01
+      ],
+      "t_settle": 0.5,
+      "t_close": 1.5,
+      "t_pause": 0.5,
+      "t_lift": 1.5,
+      "t_hold": 1.0,
+      "lift_height": 0.05,
+      "success_min_rise": 0.03,
+      "success_max_slip": 0.01,
+      "accel_warn": 500.0
+    },
+    "convention": "dx along wrist x (fingers/forward = world +x); dy along wrist y (palm normal = world +y); dz=0 (on table); yaw about pawn vertical axis; cylinder is axisymmetric so yaw is geometrically a no-op",
+    "wall_time_s": 335.5
+  },
+  "baseline_gate": {
+    "checks": {
+      "finite_state": true,
+      "no_initial_penetration": true,
+      "no_joint_limit_violation": true,
+      "robot_upright": true,
+      "no_equality_constraints": true,
+      "at_least_two_hand_links_touch_pawn": true,
+      "pawn_risen": true,
+      "held_for_full_interval": true,
+      "no_table_or_floor_contact_in_hold": true,
+      "no_slip_in_hand": true
+    },
+    "rise_mm": 52.475075290273175,
+    "control_rise_mm": 0.0004962831215982177,
+    "failed": []
+  },
+  "overall": {
+    "valid": 343,
+    "success": 319,
+    "invalid": 0,
+    "rate": 0.9300291545189504,
+    "trials": 343,
+    "categories": {
+      "success": 319,
+      "hold_failure": 17,
+      "lift_failure": 6,
+      "grasp_failure": 1,
+      "sim_error": 0,
+      "invalid_initial_clearance": 0
+    }
+  },
+  "by_position_mm": {
+    "dx=-9,dy=-9": {
+      "valid": 7,
+      "success": 7,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=-9,dy=-6": {
+      "valid": 7,
+      "success": 7,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=-9,dy=-3": {
+      "valid": 7,
+      "success": 7,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=-9,dy=0": {
+      "valid": 7,
+      "success": 7,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=-9,dy=3": {
+      "valid": 7,
+      "success": 7,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=-9,dy=6": {
+      "valid": 7,
+      "success": 7,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=-9,dy=9": {
+      "valid": 7,
+      "success": 7,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=-6,dy=-9": {
+      "valid": 7,
+      "success": 7,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=-6,dy=-6": {
+      "valid": 7,
+      "success": 7,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=-6,dy=-3": {
+      "valid": 7,
+      "success": 7,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=-6,dy=0": {
+      "valid": 7,
+      "success": 7,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=-6,dy=3": {
+      "valid": 7,
+      "success": 7,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=-6,dy=6": {
+      "valid": 7,
+      "success": 7,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=-6,dy=9": {
+      "valid": 7,
+      "success": 0,
+      "invalid": 0,
+      "rate": 0.0
+    },
+    "dx=-3,dy=-9": {
+      "valid": 7,
+      "success": 7,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=-3,dy=-6": {
+      "valid": 7,
+      "success": 7,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=-3,dy=-3": {
+      "valid": 7,
+      "success": 7,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=-3,dy=0": {
+      "valid": 7,
+      "success": 7,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=-3,dy=3": {
+      "valid": 7,
+      "success": 7,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=-3,dy=6": {
+      "valid": 7,
+      "success": 7,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=-3,dy=9": {
+      "valid": 7,
+      "success": 7,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=0,dy=-9": {
+      "valid": 7,
+      "success": 7,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=0,dy=-6": {
+      "valid": 7,
+      "success": 7,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=0,dy=-3": {
+      "valid": 7,
+      "success": 7,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=0,dy=0": {
+      "valid": 7,
+      "success": 7,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=0,dy=3": {
+      "valid": 7,
+      "success": 7,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=0,dy=6": {
+      "valid": 7,
+      "success": 3,
+      "invalid": 0,
+      "rate": 0.42857142857142855
+    },
+    "dx=0,dy=9": {
+      "valid": 7,
+      "success": 7,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=3,dy=-9": {
+      "valid": 7,
+      "success": 7,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=3,dy=-6": {
+      "valid": 7,
+      "success": 7,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=3,dy=-3": {
+      "valid": 7,
+      "success": 7,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=3,dy=0": {
+      "valid": 7,
+      "success": 7,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=3,dy=3": {
+      "valid": 7,
+      "success": 7,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=3,dy=6": {
+      "valid": 7,
+      "success": 7,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=3,dy=9": {
+      "valid": 7,
+      "success": 7,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=6,dy=-9": {
+      "valid": 7,
+      "success": 7,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=6,dy=-6": {
+      "valid": 7,
+      "success": 7,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=6,dy=-3": {
+      "valid": 7,
+      "success": 7,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=6,dy=0": {
+      "valid": 7,
+      "success": 7,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=6,dy=3": {
+      "valid": 7,
+      "success": 6,
+      "invalid": 0,
+      "rate": 0.8571428571428571
+    },
+    "dx=6,dy=6": {
+      "valid": 7,
+      "success": 7,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=6,dy=9": {
+      "valid": 7,
+      "success": 7,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=9,dy=-9": {
+      "valid": 7,
+      "success": 7,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=9,dy=-6": {
+      "valid": 7,
+      "success": 7,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=9,dy=-3": {
+      "valid": 7,
+      "success": 7,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=9,dy=0": {
+      "valid": 7,
+      "success": 1,
+      "invalid": 0,
+      "rate": 0.14285714285714285
+    },
+    "dx=9,dy=3": {
+      "valid": 7,
+      "success": 7,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=9,dy=6": {
+      "valid": 7,
+      "success": 7,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=9,dy=9": {
+      "valid": 7,
+      "success": 1,
+      "invalid": 0,
+      "rate": 0.14285714285714285
+    }
+  },
+  "by_yaw_deg": {
+    "-45": {
+      "valid": 49,
+      "success": 46,
+      "invalid": 0,
+      "rate": 0.9387755102040817
+    },
+    "-30": {
+      "valid": 49,
+      "success": 46,
+      "invalid": 0,
+      "rate": 0.9387755102040817
+    },
+    "-15": {
+      "valid": 49,
+      "success": 48,
+      "invalid": 0,
+      "rate": 0.9795918367346939
+    },
+    "0": {
+      "valid": 49,
+      "success": 45,
+      "invalid": 0,
+      "rate": 0.9183673469387755
+    },
+    "15": {
+      "valid": 49,
+      "success": 44,
+      "invalid": 0,
+      "rate": 0.8979591836734694
+    },
+    "30": {
+      "valid": 49,
+      "success": 45,
+      "invalid": 0,
+      "rate": 0.9183673469387755
+    },
+    "45": {
+      "valid": 49,
+      "success": 45,
+      "invalid": 0,
+      "rate": 0.9183673469387755
+    }
+  },
+  "by_dx_mm": {
+    "-9": {
+      "valid": 49,
+      "success": 49,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "-6": {
+      "valid": 49,
+      "success": 42,
+      "invalid": 0,
+      "rate": 0.8571428571428571
+    },
+    "-3": {
+      "valid": 49,
+      "success": 49,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "0": {
+      "valid": 49,
+      "success": 45,
+      "invalid": 0,
+      "rate": 0.9183673469387755
+    },
+    "3": {
+      "valid": 49,
+      "success": 49,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "6": {
+      "valid": 49,
+      "success": 48,
+      "invalid": 0,
+      "rate": 0.9795918367346939
+    },
+    "9": {
+      "valid": 49,
+      "success": 37,
+      "invalid": 0,
+      "rate": 0.7551020408163265
+    }
+  },
+  "by_dy_mm": {
+    "-9": {
+      "valid": 49,
+      "success": 49,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "-6": {
+      "valid": 49,
+      "success": 49,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "-3": {
+      "valid": 49,
+      "success": 49,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "0": {
+      "valid": 49,
+      "success": 43,
+      "invalid": 0,
+      "rate": 0.8775510204081632
+    },
+    "3": {
+      "valid": 49,
+      "success": 48,
+      "invalid": 0,
+      "rate": 0.9795918367346939
+    },
+    "6": {
+      "valid": 49,
+      "success": 45,
+      "invalid": 0,
+      "rate": 0.9183673469387755
+    },
+    "9": {
+      "valid": 49,
+      "success": 36,
+      "invalid": 0,
+      "rate": 0.7346938775510204
+    }
+  }
+}

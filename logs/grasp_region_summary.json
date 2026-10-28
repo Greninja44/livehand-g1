@@ -1,0 +1,317 @@
+{
+  "config": {
+    "x_offsets_mm": [
+      -6.0,
+      -3.0,
+      0.0,
+      3.0,
+      6.0
+    ],
+    "y_offsets_mm": [
+      -6.0,
+      -3.0,
+      0.0,
+      3.0,
+      6.0
+    ],
+    "yaws_deg": [
+      -30.0,
+      0.0,
+      30.0
+    ],
+    "repeats": 1,
+    "seed": 0,
+    "shuffle": false,
+    "min_clearance_mm": 2.0,
+    "grasp_config": {
+      "finger_close": [
+        -0.226,
+        -0.902,
+        -0.924,
+        0.154,
+        0.724,
+        1.095,
+        1.01
+      ],
+      "t_settle": 0.5,
+      "t_close": 1.5,
+      "t_pause": 0.5,
+      "t_lift": 1.5,
+      "t_hold": 1.0,
+      "lift_height": 0.05,
+      "success_min_rise": 0.03,
+      "success_max_slip": 0.01,
+      "accel_warn": 500.0
+    },
+    "convention": "dx along wrist x (fingers/forward = world +x); dy along wrist y (palm normal = world +y); dz=0 (on table); yaw about pawn vertical axis; cylinder is axisymmetric so yaw is geometrically a no-op",
+    "wall_time_s": 70.9
+  },
+  "baseline_gate": {
+    "checks": {
+      "finite_state": true,
+      "no_initial_penetration": true,
+      "no_joint_limit_violation": true,
+      "robot_upright": true,
+      "no_equality_constraints": true,
+      "at_least_two_hand_links_touch_pawn": true,
+      "pawn_risen": true,
+      "held_for_full_interval": true,
+      "no_table_or_floor_contact_in_hold": true,
+      "no_slip_in_hand": true
+    },
+    "rise_mm": 52.475075290273175,
+    "control_rise_mm": 0.0004962831215982177,
+    "failed": []
+  },
+  "overall": {
+    "valid": 75,
+    "success": 73,
+    "invalid": 0,
+    "rate": 0.9733333333333334,
+    "trials": 75,
+    "categories": {
+      "success": 73,
+      "hold_failure": 2,
+      "lift_failure": 0,
+      "grasp_failure": 0,
+      "sim_error": 0,
+      "invalid_initial_clearance": 0
+    }
+  },
+  "by_position_mm": {
+    "dx=-6,dy=-6": {
+      "valid": 3,
+      "success": 3,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=-6,dy=-3": {
+      "valid": 3,
+      "success": 3,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=-6,dy=0": {
+      "valid": 3,
+      "success": 3,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=-6,dy=3": {
+      "valid": 3,
+      "success": 3,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=-6,dy=6": {
+      "valid": 3,
+      "success": 3,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=-3,dy=-6": {
+      "valid": 3,
+      "success": 3,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=-3,dy=-3": {
+      "valid": 3,
+      "success": 3,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=-3,dy=0": {
+      "valid": 3,
+      "success": 3,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=-3,dy=3": {
+      "valid": 3,
+      "success": 3,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=-3,dy=6": {
+      "valid": 3,
+      "success": 3,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=0,dy=-6": {
+      "valid": 3,
+      "success": 3,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=0,dy=-3": {
+      "valid": 3,
+      "success": 3,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=0,dy=0": {
+      "valid": 3,
+      "success": 3,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=0,dy=3": {
+      "valid": 3,
+      "success": 3,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=0,dy=6": {
+      "valid": 3,
+      "success": 1,
+      "invalid": 0,
+      "rate": 0.3333333333333333
+    },
+    "dx=3,dy=-6": {
+      "valid": 3,
+      "success": 3,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=3,dy=-3": {
+      "valid": 3,
+      "success": 3,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=3,dy=0": {
+      "valid": 3,
+      "success": 3,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=3,dy=3": {
+      "valid": 3,
+      "success": 3,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=3,dy=6": {
+      "valid": 3,
+      "success": 3,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=6,dy=-6": {
+      "valid": 3,
+      "success": 3,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=6,dy=-3": {
+      "valid": 3,
+      "success": 3,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=6,dy=0": {
+      "valid": 3,
+      "success": 3,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=6,dy=3": {
+      "valid": 3,
+      "success": 3,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "dx=6,dy=6": {
+      "valid": 3,
+      "success": 3,
+      "invalid": 0,
+      "rate": 1.0
+    }
+  },
+  "by_yaw_deg": {
+    "-30": {
+      "valid": 25,
+      "success": 25,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "0": {
+      "valid": 25,
+      "success": 24,
+      "invalid": 0,
+      "rate": 0.96
+    },
+    "30": {
+      "valid": 25,
+      "success": 24,
+      "invalid": 0,
+      "rate": 0.96
+    }
+  },
+  "by_dx_mm": {
+    "-6": {
+      "valid": 15,
+      "success": 15,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "-3": {
+      "valid": 15,
+      "success": 15,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "0": {
+      "valid": 15,
+      "success": 13,
+      "invalid": 0,
+      "rate": 0.8666666666666667
+    },
+    "3": {
+      "valid": 15,
+      "success": 15,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "6": {
+      "valid": 15,
+      "success": 15,
+      "invalid": 0,
+      "rate": 1.0
+    }
+  },
+  "by_dy_mm": {
+    "-6": {
+      "valid": 15,
+      "success": 15,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "-3": {
+      "valid": 15,
+      "success": 15,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "0": {
+      "valid": 15,
+      "success": 15,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "3": {
+      "valid": 15,
+      "success": 15,
+      "invalid": 0,
+      "rate": 1.0
+    },
+    "6": {
+      "valid": 15,
+      "success": 13,
+      "invalid": 0,
+      "rate": 0.8666666666666667
+    }
+  }
+}

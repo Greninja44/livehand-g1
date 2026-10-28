@@ -1,0 +1,144 @@
+== baseline gate: nominal grasp + open-finger control ==
+nominal rise 52.5 mm, control rise 0.0 mm, PASS
+== mapping 75 trials (5x5 positions, 3 yaws, 1 repeat(s)) ==
+[  1/75] id=  0 dx=-6 dy=-6 yaw=-30 -> success                    peak=52.214mm 
+[  2/75] id=  1 dx=-3 dy=-6 yaw=-30 -> success                    peak=52.105mm 
+[  3/75] id=  2 dx=+0 dy=-6 yaw=-30 -> success                    peak=52.292mm 
+[  4/75] id=  3 dx=+3 dy=-6 yaw=-30 -> success                    peak=52.692mm 
+[  5/75] id=  4 dx=+6 dy=-6 yaw=-30 -> success                    peak=52.918mm 
+[  6/75] id=  5 dx=-6 dy=-3 yaw=-30 -> success                    peak=52.118mm 
+[  7/75] id=  6 dx=-3 dy=-3 yaw=-30 -> success                    peak=52.209mm 
+[  8/75] id=  7 dx=+0 dy=-3 yaw=-30 -> success                    peak=52.541mm 
+[  9/75] id=  8 dx=+3 dy=-3 yaw=-30 -> success                    peak=52.691mm 
+[ 10/75] id=  9 dx=+6 dy=-3 yaw=-30 -> success                    peak=53.676mm 
+[ 11/75] id= 10 dx=-6 dy=+0 yaw=-30 -> success                    peak=52.282mm 
+[ 12/75] id= 11 dx=-3 dy=+0 yaw=-30 -> success                    peak=52.796mm 
+[ 13/75] id= 12 dx=+0 dy=+0 yaw=-30 -> success                    peak=53.355mm 
+[ 14/75] id= 13 dx=+3 dy=+0 yaw=-30 -> success                    peak=53.884mm 
+[ 15/75] id= 14 dx=+6 dy=+0 yaw=-30 -> success                    peak=54.269mm 
+[ 16/75] id= 15 dx=-6 dy=+3 yaw=-30 -> success                    peak=53.506mm 
+[ 17/75] id= 16 dx=-3 dy=+3 yaw=-30 -> success                    peak=53.736mm 
+[ 18/75] id= 17 dx=+0 dy=+3 yaw=-30 -> success                    peak=54.66mm 
+[ 19/75] id= 18 dx=+3 dy=+3 yaw=-30 -> success                    peak=51.302mm 
+[ 20/75] id= 19 dx=+6 dy=+3 yaw=-30 -> success                    peak=49.929mm 
+[ 21/75] id= 20 dx=-6 dy=+6 yaw=-30 -> success                    peak=54.183mm 
+[ 22/75] id= 21 dx=-3 dy=+6 yaw=-30 -> success                    peak=51.094mm 
+[ 23/75] id= 22 dx=+0 dy=+6 yaw=-30 -> success                    peak=54.477mm 
+[ 24/75] id= 23 dx=+3 dy=+6 yaw=-30 -> success                    peak=54.454mm 
+[ 25/75] id= 24 dx=+6 dy=+6 yaw=-30 -> success                    peak=54.422mm 
+[ 26/75] id= 25 dx=-6 dy=-6 yaw=+0 -> success                    peak=52.156mm 
+[ 27/75] id= 26 dx=-3 dy=-6 yaw=+0 -> success                    peak=52.046mm 
+[ 28/75] id= 27 dx=+0 dy=-6 yaw=+0 -> success                    peak=52.285mm 
+[ 29/75] id= 28 dx=+3 dy=-6 yaw=+0 -> success                    peak=52.767mm 
+[ 30/75] id= 29 dx=+6 dy=-6 yaw=+0 -> success                    peak=52.933mm 
+[ 31/75] id= 30 dx=-6 dy=-3 yaw=+0 -> success                    peak=52.066mm 
+[ 32/75] id= 31 dx=-3 dy=-3 yaw=+0 -> success                    peak=52.196mm 
+[ 33/75] id= 32 dx=+0 dy=-3 yaw=+0 -> success                    peak=52.589mm 
+[ 34/75] id= 33 dx=+3 dy=-3 yaw=+0 -> success                    peak=52.757mm 
+[ 35/75] id= 34 dx=+6 dy=-3 yaw=+0 -> success                    peak=53.605mm 
+[ 36/75] id= 35 dx=-6 dy=+0 yaw=+0 -> success                    peak=52.233mm 
+[ 37/75] id= 36 dx=-3 dy=+0 yaw=+0 -> success                    peak=52.842mm 
+[ 38/75] id= 37 dx=+0 dy=+0 yaw=+0 -> success                    peak=53.314mm 
+[ 39/75] id= 38 dx=+3 dy=+0 yaw=+0 -> success                    peak=53.887mm 
+[ 40/75] id= 39 dx=+6 dy=+0 yaw=+0 -> success                    peak=53.369mm 
+[ 41/75] id= 40 dx=-6 dy=+3 yaw=+0 -> success                    peak=53.37mm 
+[ 42/75] id= 41 dx=-3 dy=+3 yaw=+0 -> success                    peak=53.73mm 
+[ 43/75] id= 42 dx=+0 dy=+3 yaw=+0 -> success                    peak=54.126mm 
+[ 44/75] id= 43 dx=+3 dy=+3 yaw=+0 -> success                    peak=50.96mm 
+[ 45/75] id= 44 dx=+6 dy=+3 yaw=+0 -> success                    peak=54.494mm 
+[ 46/75] id= 45 dx=-6 dy=+6 yaw=+0 -> success                    peak=53.935mm 
+[ 47/75] id= 46 dx=-3 dy=+6 yaw=+0 -> success                    peak=51.256mm 
+[ 48/75] id= 47 dx=+0 dy=+6 yaw=+0 -> hold_failure               peak=34.072mm failed at_least_two_hand_links_touch_pawn,pawn_risen,held_for_full_int
+[ 49/75] id= 48 dx=+3 dy=+6 yaw=+0 -> success                    peak=54.601mm 
+[ 50/75] id= 49 dx=+6 dy=+6 yaw=+0 -> success                    peak=54.376mm 
+[ 51/75] id= 50 dx=-6 dy=-6 yaw=+30 -> success                    peak=52.074mm 
+[ 52/75] id= 51 dx=-3 dy=-6 yaw=+30 -> success                    peak=52.059mm 
+[ 53/75] id= 52 dx=+0 dy=-6 yaw=+30 -> success                    peak=52.235mm 
+[ 54/75] id= 53 dx=+3 dy=-6 yaw=+30 -> success                    peak=52.68mm 
+[ 55/75] id= 54 dx=+6 dy=-6 yaw=+30 -> success                    peak=52.9mm 
+[ 56/75] id= 55 dx=-6 dy=-3 yaw=+30 -> success                    peak=52.105mm 
+[ 57/75] id= 56 dx=-3 dy=-3 yaw=+30 -> success                    peak=52.178mm 
+[ 58/75] id= 57 dx=+0 dy=-3 yaw=+30 -> success                    peak=52.713mm 
+[ 59/75] id= 58 dx=+3 dy=-3 yaw=+30 -> success                    peak=52.716mm 
+[ 60/75] id= 59 dx=+6 dy=-3 yaw=+30 -> success                    peak=53.546mm 
+[ 61/75] id= 60 dx=-6 dy=+0 yaw=+30 -> success                    peak=52.288mm 
+[ 62/75] id= 61 dx=-3 dy=+0 yaw=+30 -> success                    peak=52.855mm 
+[ 63/75] id= 62 dx=+0 dy=+0 yaw=+30 -> success                    peak=53.303mm 
+[ 64/75] id= 63 dx=+3 dy=+0 yaw=+30 -> success                    peak=53.812mm 
+[ 65/75] id= 64 dx=+6 dy=+0 yaw=+30 -> success                    peak=54.008mm 
+[ 66/75] id= 65 dx=-6 dy=+3 yaw=+30 -> success                    peak=53.404mm 
+[ 67/75] id= 66 dx=-3 dy=+3 yaw=+30 -> success                    peak=54.14mm 
+[ 68/75] id= 67 dx=+0 dy=+3 yaw=+30 -> success                    peak=54.517mm 
+[ 69/75] id= 68 dx=+3 dy=+3 yaw=+30 -> success                    peak=51.261mm 
+[ 70/75] id= 69 dx=+6 dy=+3 yaw=+30 -> success                    peak=54.532mm 
+[ 71/75] id= 70 dx=-6 dy=+6 yaw=+30 -> success                    peak=54.113mm 
+[ 72/75] id= 71 dx=-3 dy=+6 yaw=+30 -> success                    peak=51.282mm 
+[ 73/75] id= 72 dx=+0 dy=+6 yaw=+30 -> hold_failure               peak=43.114mm failed at_least_two_hand_links_touch_pawn,pawn_risen,held_for_full_int
+[ 74/75] id= 73 dx=+3 dy=+6 yaw=+30 -> success                    peak=54.547mm 
+[ 75/75] id= 74 dx=+6 dy=+6 yaw=+30 -> success                    peak=54.307mm 
+
+Grasp region map (scripted baseline grasp, fixed targets; only the pawn pose varies)
+
+trials: 75  valid: 75  invalid_initial_clearance (excluded): 0
+valid-trial success: 73/75 = 97.3%
+categories: success=73, hold_failure=2, lift_failure=0, grasp_failure=0, sim_error=0, invalid_initial_clearance=0
+
+Legend: S success, h hold_failure, l lift_failure, g grasp_failure, E sim_error, x invalid start
+Axes: columns = dx (mm, along fingers/forward), rows = dy (mm, along palm normal/toward midline)
+
+yaw = -30 deg   (success 25/25)
+  dy\dx    -6    -3    +0    +3    +6
+     +6     S     S     S     S     S
+     +3     S     S     S     S     S
+     +0     S     S     S     S     S
+     -3     S     S     S     S     S
+     -6     S     S     S     S     S
+
+yaw = 0 deg   (success 24/25)
+  dy\dx    -6    -3    +0    +3    +6
+     +6     S     S     h     S     S
+     +3     S     S     S     S     S
+     +0     S     S     S     S     S
+     -3     S     S     S     S     S
+     -6     S     S     S     S     S
+
+yaw = 30 deg   (success 24/25)
+  dy\dx    -6    -3    +0    +3    +6
+     +6     S     S     h     S     S
+     +3     S     S     S     S     S
+     +0     S     S     S     S     S
+     -3     S     S     S     S     S
+     -6     S     S     S     S     S
+
+Success rate by position (all yaws, valid trials only):
+  dx=-6,dy=-6      3/3
+  dx=-6,dy=-3      3/3
+  dx=-6,dy=0       3/3
+  dx=-6,dy=3       3/3
+  dx=-6,dy=6       3/3
+  dx=-3,dy=-6      3/3
+  dx=-3,dy=-3      3/3
+  dx=-3,dy=0       3/3
+  dx=-3,dy=3       3/3
+  dx=-3,dy=6       3/3
+  dx=0,dy=-6       3/3
+  dx=0,dy=-3       3/3
+  dx=0,dy=0        3/3
+  dx=0,dy=3        3/3
+  dx=0,dy=6        1/3
+  dx=3,dy=-6       3/3
+  dx=3,dy=-3       3/3
+  dx=3,dy=0        3/3
+  dx=3,dy=3        3/3
+  dx=3,dy=6        3/3
+  dx=6,dy=-6       3/3
+  dx=6,dy=-3       3/3
+  dx=6,dy=0        3/3
+  dx=6,dy=3        3/3
+  dx=6,dy=6        3/3
+
+By yaw: -30deg 25/25; 0deg 24/25; 30deg 24/25
+
+Only configurations listed above were tested; nothing is claimed outside the tested ranges (dx -6..6 mm, dy -6..6 mm, yaw -30..30 deg).
+
+wrote /home/batman/robotics/chess2bot/logs/grasp_region_trials.csv, grasp_region_summary.json/.txt, grasp_region_map.png

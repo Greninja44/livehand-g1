@@ -1,0 +1,82 @@
+# LiveHand-G1 configuration. All lengths in metres, angles in radians unless the key says deg.
+
+[camera]
+source = "camera"        # "camera" (webcam or video file path) or "synthetic" (scripted fake hand, no camera)
+device = "0"             # camera index ("0", "1", ...) or a video file path
+width = 640
+height = 480
+fps = 30
+mirror = true            # selfie view; MediaPipe handedness labels assume a mirrored image
+
+[tracking]
+model_path = "models/hand_landmarker.task"   # relative to this directory (official MediaPipe model)
+min_detection_confidence = 0.5
+min_presence_confidence = 0.5
+min_tracking_confidence = 0.5
+preferred_hand = "any"   # "Right" | "Left" | "any" (label from the mirrored image = the user's own hand)
+
+[filter]                 # One-Euro filters on the measurements (lower min_cutoff = smoother, more lag)
+pos_min_cutoff = 1.5
+pos_beta = 8.0
+curl_min_cutoff = 2.0
+curl_beta = 4.0
+
+[calibration]
+file = "calibration.json"
+samples = 20             # valid frames averaged per calibration capture
+
+[position]
+gain = 0.45              # robot metres per camera frame-height of palm motion
+depth_gain = 0.25        # robot metres per unit of ln(apparent hand size ratio); NOT metric depth
+deadzone = 0.01          # ignore tiny motions (frame-height units / ln-size)
+# rows = robot axes (x forward, y left, z up); columns = human cues [u (screen right), v (screen down), s (toward camera)]
+axis_map = [[0.0, 0.0, 1.0],
+            [-1.0, 0.0, 0.0],
+            [0.0, -1.0, 0.0]]
+workspace_half_extent = [0.12, 0.15, 0.12]   # box around the home end-effector position (robot x, y, z)
+max_speed = 0.25         # m/s limit on the commanded Cartesian target
+smoothing_tau = 0.08     # s, first-order lag on the Cartesian target
+
+[orientation]
+enabled = false          # palm-orientation control is OFF by default; toggle with 'r'
+gain = 1.0
+max_deg = 35.0           # total rotation clamp
+max_rate_deg = 60.0      # deg/s
+# robot-frame rotation from camera-frame rotation (rows: robot x, y, z; cols: cam x right, y down, z away)
+axis_map = [[0.0, 0.0, -1.0],
+            [-1.0, 0.0, 0.0],
+            [0.0, -1.0, 0.0]]
+
+[arm]
+site = "grasp_site"      # palm point on right_wrist_yaw_link (defined by scripts/grasp_scene.py)
+damping = 0.05
+max_damping = 0.25
+singularity_eps = 0.02
+nullspace_gain = 2.0     # pulls joints toward the home posture
+max_joint_velocity = 1.2 # rad/s per joint (commanded)
+joint_margin = 0.05      # rad kept away from joint limits
+rot_weight = 0.5
+max_pos_error = 0.05     # m, clamp on the IK error per tick (bounds speed)
+
+[hand]
+side = "right"
+# [thumb_0, thumb_1, thumb_2, index_0, index_1, middle_0, middle_1] -- derived with livehand/tools/find_hand_poses.py
+open  = [-0.07, 0.43, 0.0, 0.0, 0.0, 0.0, 0.0]
+fist  = [0.0, -0.9, -1.2, 1.4, 1.5, 1.4, 1.5]
+pinch = [-0.469, 0.037, -1.363, 0.913, 1.479, 0.0, 0.0]   # only thumb and index entries are used
+max_fraction = 0.9       # never command beyond this fraction of an actuator's range
+slew_rate = 4.0          # rad/s per finger actuator
+enabled = true
+
+[safety]
+stale_timeout = 0.25     # s without a fresh valid hand packet => hold
+lost_return_after = 3.0  # s of tracking loss before drifting back to home / open hand
+max_target_jump = 0.20   # m: a raw mapped-target jump larger than this between packets is rejected
+reacquire_frames = 3     # consecutive valid frames before tracking resumes
+arm_slew_margin = 1.5    # actuator slew limit = this x max_joint_velocity
+
+[sim]
+control_hz = 100
+viewer_hz = 60
+preview_hz = 30
+realtime = true

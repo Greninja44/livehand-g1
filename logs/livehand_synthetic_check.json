@@ -1,0 +1,44 @@
+{
+  "source": "SYNTHETIC (not a webcam)",
+  "sim_time": 40.00000000000292,
+  "real_time_factor": 0.9996268376272057,
+  "ctrl_in_range": true,
+  "max_slew_ratio": 1.0000000000000009,
+  "min_upright": 0.999801793974472,
+  "max_offset_m": 0.06069574152857005,
+  "max_tracking_err_m": 0.006590902518462352,
+  "hand_min": [
+    -0.46885829677858865,
+    -0.8990245546213846,
+    -1.3589637115685869,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "hand_max": [
+    -5.133923045344546e-05,
+    0.43,
+    0.0,
+    1.3975647863947152,
+    1.4973908425657663,
+    1.3975402940933497,
+    1.4973646008143033
+  ],
+  "hold_ok_disabled": true,
+  "estop_frozen": true,
+  "enabled": true,
+  "estop": true,
+  "cam_fps": 29.441247334763855,
+  "latency_ms_median": 4.475559499951487,
+  "latency_ms_p95": 12.95131804986341,
+  "final_mode": "E-STOP",
+  "rejected_jumps": 0,
+  "vision_threads_stopped": true,
+  "final_offset_m": [
+    0.02066750362121018,
+    -0.024172803069423134,
+    -0.034478742141302754
+  ],
+  "finite": true
+}

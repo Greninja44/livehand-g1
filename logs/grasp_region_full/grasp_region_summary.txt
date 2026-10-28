@@ -1,0 +1,133 @@
+Grasp region map (scripted baseline grasp, fixed targets; only the pawn pose varies)
+
+trials: 343  valid: 343  invalid_initial_clearance (excluded): 0
+valid-trial success: 319/343 = 93.0%
+categories: success=319, hold_failure=17, lift_failure=6, grasp_failure=1, sim_error=0, invalid_initial_clearance=0
+
+Legend: S success, h hold_failure, l lift_failure, g grasp_failure, E sim_error, x invalid start
+Axes: columns = dx (mm, along fingers/forward), rows = dy (mm, along palm normal/toward midline)
+
+yaw = -45 deg   (success 46/49)
+  dy\dx    -9    -6    -3    +0    +3    +6    +9
+     +9     S     h     S     S     S     S     g
+     +6     S     S     S     S     S     S     S
+     +3     S     S     S     S     S     S     S
+     +0     S     S     S     S     S     S     h
+     -3     S     S     S     S     S     S     S
+     -6     S     S     S     S     S     S     S
+     -9     S     S     S     S     S     S     S
+
+yaw = -30 deg   (success 46/49)
+  dy\dx    -9    -6    -3    +0    +3    +6    +9
+     +9     S     h     S     S     S     S     l
+     +6     S     S     S     S     S     S     S
+     +3     S     S     S     S     S     S     S
+     +0     S     S     S     S     S     S     h
+     -3     S     S     S     S     S     S     S
+     -6     S     S     S     S     S     S     S
+     -9     S     S     S     S     S     S     S
+
+yaw = -15 deg   (success 48/49)
+  dy\dx    -9    -6    -3    +0    +3    +6    +9
+     +9     S     l     S     S     S     S     S
+     +6     S     S     S     S     S     S     S
+     +3     S     S     S     S     S     S     S
+     +0     S     S     S     S     S     S     S
+     -3     S     S     S     S     S     S     S
+     -6     S     S     S     S     S     S     S
+     -9     S     S     S     S     S     S     S
+
+yaw = 0 deg   (success 45/49)
+  dy\dx    -9    -6    -3    +0    +3    +6    +9
+     +9     S     h     S     S     S     S     l
+     +6     S     S     S     h     S     S     S
+     +3     S     S     S     S     S     S     S
+     +0     S     S     S     S     S     S     h
+     -3     S     S     S     S     S     S     S
+     -6     S     S     S     S     S     S     S
+     -9     S     S     S     S     S     S     S
+
+yaw = 15 deg   (success 44/49)
+  dy\dx    -9    -6    -3    +0    +3    +6    +9
+     +9     S     h     S     S     S     S     l
+     +6     S     S     S     h     S     S     S
+     +3     S     S     S     S     S     h     S
+     +0     S     S     S     S     S     S     h
+     -3     S     S     S     S     S     S     S
+     -6     S     S     S     S     S     S     S
+     -9     S     S     S     S     S     S     S
+
+yaw = 30 deg   (success 45/49)
+  dy\dx    -9    -6    -3    +0    +3    +6    +9
+     +9     S     h     S     S     S     S     l
+     +6     S     S     S     h     S     S     S
+     +3     S     S     S     S     S     S     S
+     +0     S     S     S     S     S     S     h
+     -3     S     S     S     S     S     S     S
+     -6     S     S     S     S     S     S     S
+     -9     S     S     S     S     S     S     S
+
+yaw = 45 deg   (success 45/49)
+  dy\dx    -9    -6    -3    +0    +3    +6    +9
+     +9     S     h     S     S     S     S     l
+     +6     S     S     S     h     S     S     S
+     +3     S     S     S     S     S     S     S
+     +0     S     S     S     S     S     S     h
+     -3     S     S     S     S     S     S     S
+     -6     S     S     S     S     S     S     S
+     -9     S     S     S     S     S     S     S
+
+Success rate by position (all yaws, valid trials only):
+  dx=-9,dy=-9      7/7
+  dx=-9,dy=-6      7/7
+  dx=-9,dy=-3      7/7
+  dx=-9,dy=0       7/7
+  dx=-9,dy=3       7/7
+  dx=-9,dy=6       7/7
+  dx=-9,dy=9       7/7
+  dx=-6,dy=-9      7/7
+  dx=-6,dy=-6      7/7
+  dx=-6,dy=-3      7/7
+  dx=-6,dy=0       7/7
+  dx=-6,dy=3       7/7
+  dx=-6,dy=6       7/7
+  dx=-6,dy=9       0/7
+  dx=-3,dy=-9      7/7
+  dx=-3,dy=-6      7/7
+  dx=-3,dy=-3      7/7
+  dx=-3,dy=0       7/7
+  dx=-3,dy=3       7/7
+  dx=-3,dy=6       7/7
+  dx=-3,dy=9       7/7
+  dx=0,dy=-9       7/7
+  dx=0,dy=-6       7/7
+  dx=0,dy=-3       7/7
+  dx=0,dy=0        7/7
+  dx=0,dy=3        7/7
+  dx=0,dy=6        3/7
+  dx=0,dy=9        7/7
+  dx=3,dy=-9       7/7
+  dx=3,dy=-6       7/7
+  dx=3,dy=-3       7/7
+  dx=3,dy=0        7/7
+  dx=3,dy=3        7/7
+  dx=3,dy=6        7/7
+  dx=3,dy=9        7/7
+  dx=6,dy=-9       7/7
+  dx=6,dy=-6       7/7
+  dx=6,dy=-3       7/7
+  dx=6,dy=0        7/7
+  dx=6,dy=3        6/7
+  dx=6,dy=6        7/7
+  dx=6,dy=9        7/7
+  dx=9,dy=-9       7/7
+  dx=9,dy=-6       7/7
+  dx=9,dy=-3       7/7
+  dx=9,dy=0        1/7
+  dx=9,dy=3        7/7
+  dx=9,dy=6        7/7
+  dx=9,dy=9        1/7
+
+By yaw: -45deg 46/49; -30deg 46/49; -15deg 48/49; 0deg 45/49; 15deg 44/49; 30deg 45/49; 45deg 45/49
+
+Only configurations listed above were tested; nothing is claimed outside the tested ranges (dx -9..9 mm, dy -9..9 mm, yaw -45..45 deg).

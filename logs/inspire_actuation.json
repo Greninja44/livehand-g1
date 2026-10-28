@@ -1,0 +1,167 @@
+{
+  "side": "R",
+  "results": [
+    {
+      "actuator": "R_thumb_proximal_yaw_joint",
+      "direction": "+",
+      "target": 0.65,
+      "q_final": 0.6503761016175809,
+      "tracking_error": 0.0003761016175808374,
+      "mimic_follow_error": 0.0,
+      "max_other_active_joint_motion": 0.0006793477565974156,
+      "pelvis_dz": -6.67004222631995e-07,
+      "upright": 0.9999927171450891,
+      "ok": true
+    },
+    {
+      "actuator": "R_thumb_proximal_yaw_joint",
+      "direction": "-",
+      "target": -0.05,
+      "q_final": 0.03632570770718244,
+      "tracking_error": 0.08632570770718245,
+      "mimic_follow_error": 0.0,
+      "max_other_active_joint_motion": 2.7100065207413614e-05,
+      "pelvis_dz": -6.70491594800815e-07,
+      "upright": 0.9999926848393356,
+      "ok": false
+    },
+    {
+      "actuator": "R_thumb_proximal_pitch_joint",
+      "direction": "+",
+      "target": 0.3,
+      "q_final": 0.23378180859015962,
+      "tracking_error": 0.06621819140984037,
+      "mimic_follow_error": 0.0004792285396462148,
+      "max_other_active_joint_motion": 0.02183174999012913,
+      "pelvis_dz": -6.696245810067225e-07,
+      "upright": 0.9999926967956482,
+      "ok": false
+    },
+    {
+      "actuator": "R_thumb_proximal_pitch_joint",
+      "direction": "-",
+      "target": -0.05,
+      "q_final": -0.003402203135311879,
+      "tracking_error": 0.046597796864688124,
+      "mimic_follow_error": 0.00540577029847161,
+      "max_other_active_joint_motion": 2.276145997482385e-05,
+      "pelvis_dz": -6.70374944555796e-07,
+      "upright": 0.999992685929733,
+      "ok": false
+    },
+    {
+      "actuator": "R_index_proximal_joint",
+      "direction": "+",
+      "target": 0.85,
+      "q_final": 0.8497684820043224,
+      "tracking_error": 0.00023151799567755482,
+      "mimic_follow_error": 7.093995818019394e-05,
+      "max_other_active_joint_motion": 2.275827696623001e-05,
+      "pelvis_dz": -6.694190665124111e-07,
+      "upright": 0.9999926942143873,
+      "ok": true
+    },
+    {
+      "actuator": "R_index_proximal_joint",
+      "direction": "-",
+      "target": 0.0,
+      "q_final": 0.00016638739753769253,
+      "tracking_error": 0.00016638739753769253,
+      "mimic_follow_error": 3.950732054182519e-05,
+      "max_other_active_joint_motion": 2.2761410452503956e-05,
+      "pelvis_dz": -6.703684279907307e-07,
+      "upright": 0.9999926859903161,
+      "ok": true
+    },
+    {
+      "actuator": "R_middle_proximal_joint",
+      "direction": "+",
+      "target": 0.85,
+      "q_final": 0.8497330609089472,
+      "tracking_error": 0.000266939091052798,
+      "mimic_follow_error": 8.312416862543692e-05,
+      "max_other_active_joint_motion": 2.0543392810176974e-05,
+      "pelvis_dz": -6.693715201011585e-07,
+      "upright": 0.9999926946405954,
+      "ok": true
+    },
+    {
+      "actuator": "R_middle_proximal_joint",
+      "direction": "-",
+      "target": 0.0,
+      "q_final": 0.00018679072685379898,
+      "tracking_error": 0.00018679072685379898,
+      "mimic_follow_error": 4.5652648305216724e-05,
+      "max_other_active_joint_motion": 2.0546222020250657e-05,
+      "pelvis_dz": -6.703684279907307e-07,
+      "upright": 0.9999926859903161,
+      "ok": true
+    },
+    {
+      "actuator": "R_ring_proximal_joint",
+      "direction": "+",
+      "target": 0.85,
+      "q_final": 0.8497616392203922,
+      "tracking_error": 0.00023836077960781576,
+      "mimic_follow_error": 7.263321554051849e-05,
+      "max_other_active_joint_motion": 2.2758958243527253e-05,
+      "pelvis_dz": -6.695908325582423e-07,
+      "upright": 0.999992692719426,
+      "ok": true
+    },
+    {
+      "actuator": "R_ring_proximal_joint",
+      "direction": "-",
+      "target": 0.0,
+      "q_final": 0.00016918994039332694,
+      "tracking_error": 0.00016918994039332694,
+      "mimic_follow_error": 4.0374420512389426e-05,
+      "max_other_active_joint_motion": 2.2761410452503956e-05,
+      "pelvis_dz": -6.703684279907307e-07,
+      "upright": 0.9999926859903161,
+      "ok": true
+    },
+    {
+      "actuator": "R_pinky_proximal_joint",
+      "direction": "+",
+      "target": 0.85,
+      "q_final": 0.8498266334152303,
+      "tracking_error": 0.00017336658476962974,
+      "mimic_follow_error": 4.95509608481326e-05,
+      "max_other_active_joint_motion": 2.2760646796855392e-05,
+      "pelvis_dz": -6.698737566868118e-07,
+      "upright": 0.9999926902485913,
+      "ok": true
+    },
+    {
+      "actuator": "R_pinky_proximal_joint",
+      "direction": "-",
+      "target": 0.0,
+      "q_final": 0.00013069018121501962,
+      "tracking_error": 0.00013069018121501962,
+      "mimic_follow_error": 2.835426591955319e-05,
+      "max_other_active_joint_motion": 2.2761410452503956e-05,
+      "pelvis_dz": -6.703684279907307e-07,
+      "upright": 0.9999926859903161,
+      "ok": true
+    }
+  ],
+  "failures": [
+    [
+      "R_thumb_proximal_yaw_joint",
+      "-",
+      "criteria not met"
+    ],
+    [
+      "R_thumb_proximal_pitch_joint",
+      "+",
+      "criteria not met"
+    ],
+    [
+      "R_thumb_proximal_pitch_joint",
+      "-",
+      "criteria not met"
+    ]
+  ],
+  "mujoco": "3.17.0"
+}

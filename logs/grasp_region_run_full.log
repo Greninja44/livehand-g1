@@ -1,0 +1,482 @@
+== baseline gate: nominal grasp + open-finger control ==
+nominal rise 52.5 mm, control rise 0.0 mm, PASS
+== mapping 343 trials (7x7 positions, 7 yaws, 1 repeat(s)) ==
+[  1/343] id=  0 dx=-9 dy=-9 yaw=-45 -> success                    peak=51.157mm 
+[  2/343] id=  1 dx=-6 dy=-9 yaw=-45 -> success                    peak=52.085mm 
+[  3/343] id=  2 dx=-3 dy=-9 yaw=-45 -> success                    peak=52.126mm 
+[  4/343] id=  3 dx=+0 dy=-9 yaw=-45 -> success                    peak=52.108mm 
+[  5/343] id=  4 dx=+3 dy=-9 yaw=-45 -> success                    peak=52.704mm 
+[  6/343] id=  5 dx=+6 dy=-9 yaw=-45 -> success                    peak=52.793mm 
+[  7/343] id=  6 dx=+9 dy=-9 yaw=-45 -> success                    peak=53.279mm 
+[  8/343] id=  7 dx=-9 dy=-6 yaw=-45 -> success                    peak=52.014mm 
+[  9/343] id=  8 dx=-6 dy=-6 yaw=-45 -> success                    peak=52.224mm 
+[ 10/343] id=  9 dx=-3 dy=-6 yaw=-45 -> success                    peak=52.08mm 
+[ 11/343] id= 10 dx=+0 dy=-6 yaw=-45 -> success                    peak=52.279mm 
+[ 12/343] id= 11 dx=+3 dy=-6 yaw=-45 -> success                    peak=52.661mm 
+[ 13/343] id= 12 dx=+6 dy=-6 yaw=-45 -> success                    peak=52.714mm 
+[ 14/343] id= 13 dx=+9 dy=-6 yaw=-45 -> success                    peak=53.191mm 
+[ 15/343] id= 14 dx=-9 dy=-3 yaw=-45 -> success                    peak=52.217mm 
+[ 16/343] id= 15 dx=-6 dy=-3 yaw=-45 -> success                    peak=52.183mm 
+[ 17/343] id= 16 dx=-3 dy=-3 yaw=-45 -> success                    peak=52.209mm 
+[ 18/343] id= 17 dx=+0 dy=-3 yaw=-45 -> success                    peak=52.754mm 
+[ 19/343] id= 18 dx=+3 dy=-3 yaw=-45 -> success                    peak=52.84mm 
+[ 20/343] id= 19 dx=+6 dy=-3 yaw=-45 -> success                    peak=53.541mm 
+[ 21/343] id= 20 dx=+9 dy=-3 yaw=-45 -> success                    peak=54.511mm 
+[ 22/343] id= 21 dx=-9 dy=+0 yaw=-45 -> success                    peak=52.054mm 
+[ 23/343] id= 22 dx=-6 dy=+0 yaw=-45 -> success                    peak=52.178mm 
+[ 24/343] id= 23 dx=-3 dy=+0 yaw=-45 -> success                    peak=52.849mm 
+[ 25/343] id= 24 dx=+0 dy=+0 yaw=-45 -> success                    peak=53.286mm 
+[ 26/343] id= 25 dx=+3 dy=+0 yaw=-45 -> success                    peak=53.843mm 
+[ 27/343] id= 26 dx=+6 dy=+0 yaw=-45 -> success                    peak=54.411mm 
+[ 28/343] id= 27 dx=+9 dy=+0 yaw=-45 -> hold_failure               peak=46.164mm failed at_least_two_hand_links_touch_pawn,pawn_risen,held_for_full_int
+[ 29/343] id= 28 dx=-9 dy=+3 yaw=-45 -> success                    peak=53.277mm 
+[ 30/343] id= 29 dx=-6 dy=+3 yaw=-45 -> success                    peak=53.466mm 
+[ 31/343] id= 30 dx=-3 dy=+3 yaw=-45 -> success                    peak=53.85mm 
+[ 32/343] id= 31 dx=+0 dy=+3 yaw=-45 -> success                    peak=54.528mm 
+[ 33/343] id= 32 dx=+3 dy=+3 yaw=-45 -> success                    peak=49.83mm 
+[ 34/343] id= 33 dx=+6 dy=+3 yaw=-45 -> success                    peak=49.934mm 
+[ 35/343] id= 34 dx=+9 dy=+3 yaw=-45 -> success                    peak=54.402mm 
+[ 36/343] id= 35 dx=-9 dy=+6 yaw=-45 -> success                    peak=54.215mm 
+[ 37/343] id= 36 dx=-6 dy=+6 yaw=-45 -> success                    peak=53.978mm 
+[ 38/343] id= 37 dx=-3 dy=+6 yaw=-45 -> success                    peak=51.184mm 
+[ 39/343] id= 38 dx=+0 dy=+6 yaw=-45 -> success                    peak=54.534mm 
+[ 40/343] id= 39 dx=+3 dy=+6 yaw=-45 -> success                    peak=54.482mm 
+[ 41/343] id= 40 dx=+6 dy=+6 yaw=-45 -> success                    peak=54.407mm 
+[ 42/343] id= 41 dx=+9 dy=+6 yaw=-45 -> success                    peak=54.25mm 
+[ 43/343] id= 42 dx=-9 dy=+9 yaw=-45 -> success                    peak=50.794mm 
+[ 44/343] id= 43 dx=-6 dy=+9 yaw=-45 -> hold_failure               peak=45.448mm failed at_least_two_hand_links_touch_pawn,pawn_risen,held_for_full_int
+[ 45/343] id= 44 dx=-3 dy=+9 yaw=-45 -> success                    peak=54.582mm 
+[ 46/343] id= 45 dx=+0 dy=+9 yaw=-45 -> success                    peak=54.53mm 
+[ 47/343] id= 46 dx=+3 dy=+9 yaw=-45 -> success                    peak=54.343mm 
+[ 48/343] id= 47 dx=+6 dy=+9 yaw=-45 -> success                    peak=54.346mm 
+[ 49/343] id= 48 dx=+9 dy=+9 yaw=-45 -> grasp_failure              peak=0.873mm no hand contact after closure; pawn moved 175.2 mm in xy; end contacts
+[ 50/343] id= 49 dx=-9 dy=-9 yaw=-30 -> success                    peak=50.82mm 
+[ 51/343] id= 50 dx=-6 dy=-9 yaw=-30 -> success                    peak=52.031mm 
+[ 52/343] id= 51 dx=-3 dy=-9 yaw=-30 -> success                    peak=52.137mm 
+[ 53/343] id= 52 dx=+0 dy=-9 yaw=-30 -> success                    peak=52.204mm 
+[ 54/343] id= 53 dx=+3 dy=-9 yaw=-30 -> success                    peak=52.563mm 
+[ 55/343] id= 54 dx=+6 dy=-9 yaw=-30 -> success                    peak=52.737mm 
+[ 56/343] id= 55 dx=+9 dy=-9 yaw=-30 -> success                    peak=53.329mm 
+[ 57/343] id= 56 dx=-9 dy=-6 yaw=-30 -> success                    peak=51.963mm 
+[ 58/343] id= 57 dx=-6 dy=-6 yaw=-30 -> success                    peak=52.214mm 
+[ 59/343] id= 58 dx=-3 dy=-6 yaw=-30 -> success                    peak=52.105mm 
+[ 60/343] id= 59 dx=+0 dy=-6 yaw=-30 -> success                    peak=52.292mm 
+[ 61/343] id= 60 dx=+3 dy=-6 yaw=-30 -> success                    peak=52.692mm 
+[ 62/343] id= 61 dx=+6 dy=-6 yaw=-30 -> success                    peak=52.918mm 
+[ 63/343] id= 62 dx=+9 dy=-6 yaw=-30 -> success                    peak=53.355mm 
+[ 64/343] id= 63 dx=-9 dy=-3 yaw=-30 -> success                    peak=52.216mm 
+[ 65/343] id= 64 dx=-6 dy=-3 yaw=-30 -> success                    peak=52.118mm 
+[ 66/343] id= 65 dx=-3 dy=-3 yaw=-30 -> success                    peak=52.209mm 
+[ 67/343] id= 66 dx=+0 dy=-3 yaw=-30 -> success                    peak=52.541mm 
+[ 68/343] id= 67 dx=+3 dy=-3 yaw=-30 -> success                    peak=52.691mm 
+[ 69/343] id= 68 dx=+6 dy=-3 yaw=-30 -> success                    peak=53.676mm 
+[ 70/343] id= 69 dx=+9 dy=-3 yaw=-30 -> success                    peak=54.354mm 
+[ 71/343] id= 70 dx=-9 dy=+0 yaw=-30 -> success                    peak=51.875mm 
+[ 72/343] id= 71 dx=-6 dy=+0 yaw=-30 -> success                    peak=52.282mm 
+[ 73/343] id= 72 dx=-3 dy=+0 yaw=-30 -> success                    peak=52.796mm 
+[ 74/343] id= 73 dx=+0 dy=+0 yaw=-30 -> success                    peak=53.355mm 
+[ 75/343] id= 74 dx=+3 dy=+0 yaw=-30 -> success                    peak=53.884mm 
+[ 76/343] id= 75 dx=+6 dy=+0 yaw=-30 -> success                    peak=54.269mm 
+[ 77/343] id= 76 dx=+9 dy=+0 yaw=-30 -> hold_failure               peak=30.478mm failed at_least_two_hand_links_touch_pawn,pawn_risen,held_for_full_int
+[ 78/343] id= 77 dx=-9 dy=+3 yaw=-30 -> success                    peak=53.085mm 
+[ 79/343] id= 78 dx=-6 dy=+3 yaw=-30 -> success                    peak=53.506mm 
+[ 80/343] id= 79 dx=-3 dy=+3 yaw=-30 -> success                    peak=53.736mm 
+[ 81/343] id= 80 dx=+0 dy=+3 yaw=-30 -> success                    peak=54.66mm 
+[ 82/343] id= 81 dx=+3 dy=+3 yaw=-30 -> success                    peak=51.302mm 
+[ 83/343] id= 82 dx=+6 dy=+3 yaw=-30 -> success                    peak=49.929mm 
+[ 84/343] id= 83 dx=+9 dy=+3 yaw=-30 -> success                    peak=54.388mm 
+[ 85/343] id= 84 dx=-9 dy=+6 yaw=-30 -> success                    peak=54.278mm 
+[ 86/343] id= 85 dx=-6 dy=+6 yaw=-30 -> success                    peak=54.183mm 
+[ 87/343] id= 86 dx=-3 dy=+6 yaw=-30 -> success                    peak=51.094mm 
+[ 88/343] id= 87 dx=+0 dy=+6 yaw=-30 -> success                    peak=54.477mm 
+[ 89/343] id= 88 dx=+3 dy=+6 yaw=-30 -> success                    peak=54.454mm 
+[ 90/343] id= 89 dx=+6 dy=+6 yaw=-30 -> success                    peak=54.422mm 
+[ 91/343] id= 90 dx=+9 dy=+6 yaw=-30 -> success                    peak=54.052mm 
+[ 92/343] id= 91 dx=-9 dy=+9 yaw=-30 -> success                    peak=50.859mm 
+[ 93/343] id= 92 dx=-6 dy=+9 yaw=-30 -> hold_failure               peak=43.018mm failed at_least_two_hand_links_touch_pawn,pawn_risen,held_for_full_int
+[ 94/343] id= 93 dx=-3 dy=+9 yaw=-30 -> success                    peak=54.727mm 
+[ 95/343] id= 94 dx=+0 dy=+9 yaw=-30 -> success                    peak=54.374mm 
+[ 96/343] id= 95 dx=+3 dy=+9 yaw=-30 -> success                    peak=54.202mm 
+[ 97/343] id= 96 dx=+6 dy=+9 yaw=-30 -> success                    peak=54.196mm 
+[ 98/343] id= 97 dx=+9 dy=+9 yaw=-30 -> lift_failure               peak=0.528mm peak rise 0.5 mm < 30 mm; closure contacts ['right_hand_thumb_2_link']
+[ 99/343] id= 98 dx=-9 dy=-9 yaw=-15 -> success                    peak=50.949mm 
+[100/343] id= 99 dx=-6 dy=-9 yaw=-15 -> success                    peak=51.997mm 
+[101/343] id=100 dx=-3 dy=-9 yaw=-15 -> success                    peak=52.098mm 
+[102/343] id=101 dx=+0 dy=-9 yaw=-15 -> success                    peak=52.214mm 
+[103/343] id=102 dx=+3 dy=-9 yaw=-15 -> success                    peak=52.697mm 
+[104/343] id=103 dx=+6 dy=-9 yaw=-15 -> success                    peak=52.845mm 
+[105/343] id=104 dx=+9 dy=-9 yaw=-15 -> success                    peak=52.952mm 
+[106/343] id=105 dx=-9 dy=-6 yaw=-15 -> success                    peak=51.947mm 
+[107/343] id=106 dx=-6 dy=-6 yaw=-15 -> success                    peak=52.204mm 
+[108/343] id=107 dx=-3 dy=-6 yaw=-15 -> success                    peak=52.142mm 
+[109/343] id=108 dx=+0 dy=-6 yaw=-15 -> success                    peak=52.218mm 
+[110/343] id=109 dx=+3 dy=-6 yaw=-15 -> success                    peak=52.691mm 
+[111/343] id=110 dx=+6 dy=-6 yaw=-15 -> success                    peak=52.692mm 
+[112/343] id=111 dx=+9 dy=-6 yaw=-15 -> success                    peak=53.263mm 
+[113/343] id=112 dx=-9 dy=-3 yaw=-15 -> success                    peak=52.125mm 
+[114/343] id=113 dx=-6 dy=-3 yaw=-15 -> success                    peak=52.204mm 
+[115/343] id=114 dx=-3 dy=-3 yaw=-15 -> success                    peak=52.25mm 
+[116/343] id=115 dx=+0 dy=-3 yaw=-15 -> success                    peak=52.695mm 
+[117/343] id=116 dx=+3 dy=-3 yaw=-15 -> success                    peak=52.817mm 
+[118/343] id=117 dx=+6 dy=-3 yaw=-15 -> success                    peak=53.377mm 
+[119/343] id=118 dx=+9 dy=-3 yaw=-15 -> success                    peak=54.256mm 
+[120/343] id=119 dx=-9 dy=+0 yaw=-15 -> success                    peak=52.009mm 
+[121/343] id=120 dx=-6 dy=+0 yaw=-15 -> success                    peak=52.11mm 
+[122/343] id=121 dx=-3 dy=+0 yaw=-15 -> success                    peak=52.681mm 
+[123/343] id=122 dx=+0 dy=+0 yaw=-15 -> success                    peak=53.138mm 
+[124/343] id=123 dx=+3 dy=+0 yaw=-15 -> success                    peak=53.882mm 
+[125/343] id=124 dx=+6 dy=+0 yaw=-15 -> success                    peak=54.468mm 
+[126/343] id=125 dx=+9 dy=+0 yaw=-15 -> success                    peak=50.367mm 
+[127/343] id=126 dx=-9 dy=+3 yaw=-15 -> success                    peak=53.203mm 
+[128/343] id=127 dx=-6 dy=+3 yaw=-15 -> success                    peak=53.274mm 
+[129/343] id=128 dx=-3 dy=+3 yaw=-15 -> success                    peak=53.7mm 
+[130/343] id=129 dx=+0 dy=+3 yaw=-15 -> success                    peak=54.465mm 
+[131/343] id=130 dx=+3 dy=+3 yaw=-15 -> success                    peak=51.196mm 
+[132/343] id=131 dx=+6 dy=+3 yaw=-15 -> success                    peak=49.904mm 
+[133/343] id=132 dx=+9 dy=+3 yaw=-15 -> success                    peak=54.401mm 
+[134/343] id=133 dx=-9 dy=+6 yaw=-15 -> success                    peak=54.214mm 
+[135/343] id=134 dx=-6 dy=+6 yaw=-15 -> success                    peak=54.276mm 
+[136/343] id=135 dx=-3 dy=+6 yaw=-15 -> success                    peak=51.564mm 
+[137/343] id=136 dx=+0 dy=+6 yaw=-15 -> success                    peak=49.876mm 
+[138/343] id=137 dx=+3 dy=+6 yaw=-15 -> success                    peak=54.531mm 
+[139/343] id=138 dx=+6 dy=+6 yaw=-15 -> success                    peak=54.352mm 
+[140/343] id=139 dx=+9 dy=+6 yaw=-15 -> success                    peak=54.221mm 
+[141/343] id=140 dx=-9 dy=+9 yaw=-15 -> success                    peak=51.296mm 
+[142/343] id=141 dx=-6 dy=+9 yaw=-15 -> lift_failure               peak=29.704mm peak rise 29.7 mm < 30 mm; closure contacts ['right_hand_middle_0_link
+[143/343] id=142 dx=-3 dy=+9 yaw=-15 -> success                    peak=54.592mm 
+[144/343] id=143 dx=+0 dy=+9 yaw=-15 -> success                    peak=54.388mm 
+[145/343] id=144 dx=+3 dy=+9 yaw=-15 -> success                    peak=54.405mm 
+[146/343] id=145 dx=+6 dy=+9 yaw=-15 -> success                    peak=54.214mm 
+[147/343] id=146 dx=+9 dy=+9 yaw=-15 -> success                    peak=54.621mm 
+[148/343] id=147 dx=-9 dy=-9 yaw=+0 -> success                    peak=50.871mm 
+[149/343] id=148 dx=-6 dy=-9 yaw=+0 -> success                    peak=52.036mm 
+[150/343] id=149 dx=-3 dy=-9 yaw=+0 -> success                    peak=52.002mm 
+[151/343] id=150 dx=+0 dy=-9 yaw=+0 -> success                    peak=52.226mm 
+[152/343] id=151 dx=+3 dy=-9 yaw=+0 -> success                    peak=52.303mm 
+[153/343] id=152 dx=+6 dy=-9 yaw=+0 -> success                    peak=52.848mm 
+[154/343] id=153 dx=+9 dy=-9 yaw=+0 -> success                    peak=53.216mm 
+[155/343] id=154 dx=-9 dy=-6 yaw=+0 -> success                    peak=52.064mm 
+[156/343] id=155 dx=-6 dy=-6 yaw=+0 -> success                    peak=52.156mm 
+[157/343] id=156 dx=-3 dy=-6 yaw=+0 -> success                    peak=52.046mm 
+[158/343] id=157 dx=+0 dy=-6 yaw=+0 -> success                    peak=52.285mm 
+[159/343] id=158 dx=+3 dy=-6 yaw=+0 -> success                    peak=52.767mm 
+[160/343] id=159 dx=+6 dy=-6 yaw=+0 -> success                    peak=52.933mm 
+[161/343] id=160 dx=+9 dy=-6 yaw=+0 -> success                    peak=53.357mm 
+[162/343] id=161 dx=-9 dy=-3 yaw=+0 -> success                    peak=52.11mm 
+[163/343] id=162 dx=-6 dy=-3 yaw=+0 -> success                    peak=52.066mm 
+[164/343] id=163 dx=-3 dy=-3 yaw=+0 -> success                    peak=52.196mm 
+[165/343] id=164 dx=+0 dy=-3 yaw=+0 -> success                    peak=52.589mm 
+[166/343] id=165 dx=+3 dy=-3 yaw=+0 -> success                    peak=52.757mm 
+[167/343] id=166 dx=+6 dy=-3 yaw=+0 -> success                    peak=53.605mm 
+[168/343] id=167 dx=+9 dy=-3 yaw=+0 -> success                    peak=54.44mm 
+[169/343] id=168 dx=-9 dy=+0 yaw=+0 -> success                    peak=51.954mm 
+[170/343] id=169 dx=-6 dy=+0 yaw=+0 -> success                    peak=52.233mm 
+[171/343] id=170 dx=-3 dy=+0 yaw=+0 -> success                    peak=52.842mm 
+[172/343] id=171 dx=+0 dy=+0 yaw=+0 -> success                    peak=53.314mm 
+[173/343] id=172 dx=+3 dy=+0 yaw=+0 -> success                    peak=53.887mm 
+[174/343] id=173 dx=+6 dy=+0 yaw=+0 -> success                    peak=53.369mm 
+[175/343] id=174 dx=+9 dy=+0 yaw=+0 -> hold_failure               peak=44.246mm failed at_least_two_hand_links_touch_pawn,pawn_risen,held_for_full_int
+[176/343] id=175 dx=-9 dy=+3 yaw=+0 -> success                    peak=53.226mm 
+[177/343] id=176 dx=-6 dy=+3 yaw=+0 -> success                    peak=53.37mm 
+[178/343] id=177 dx=-3 dy=+3 yaw=+0 -> success                    peak=53.73mm 
+[179/343] id=178 dx=+0 dy=+3 yaw=+0 -> success                    peak=54.126mm 
+[180/343] id=179 dx=+3 dy=+3 yaw=+0 -> success                    peak=50.96mm 
+[181/343] id=180 dx=+6 dy=+3 yaw=+0 -> success                    peak=54.494mm 
+[182/343] id=181 dx=+9 dy=+3 yaw=+0 -> success                    peak=54.435mm 
+[183/343] id=182 dx=-9 dy=+6 yaw=+0 -> success                    peak=54.217mm 
+[184/343] id=183 dx=-6 dy=+6 yaw=+0 -> success                    peak=53.935mm 
+[185/343] id=184 dx=-3 dy=+6 yaw=+0 -> success                    peak=51.256mm 
+[186/343] id=185 dx=+0 dy=+6 yaw=+0 -> hold_failure               peak=34.072mm failed at_least_two_hand_links_touch_pawn,pawn_risen,held_for_full_int
+[187/343] id=186 dx=+3 dy=+6 yaw=+0 -> success                    peak=54.601mm 
+[188/343] id=187 dx=+6 dy=+6 yaw=+0 -> success                    peak=54.376mm 
+[189/343] id=188 dx=+9 dy=+6 yaw=+0 -> success                    peak=54.2mm 
+[190/343] id=189 dx=-9 dy=+9 yaw=+0 -> success                    peak=50.26mm 
+[191/343] id=190 dx=-6 dy=+9 yaw=+0 -> hold_failure               peak=45.223mm failed at_least_two_hand_links_touch_pawn,pawn_risen,held_for_full_int
+[192/343] id=191 dx=-3 dy=+9 yaw=+0 -> success                    peak=54.505mm 
+[193/343] id=192 dx=+0 dy=+9 yaw=+0 -> success                    peak=54.426mm 
+[194/343] id=193 dx=+3 dy=+9 yaw=+0 -> success                    peak=54.336mm 
+[195/343] id=194 dx=+6 dy=+9 yaw=+0 -> success                    peak=53.996mm 
+[196/343] id=195 dx=+9 dy=+9 yaw=+0 -> lift_failure               peak=0.567mm peak rise 0.6 mm < 30 mm; closure contacts ['right_hand_thumb_1_link',
+[197/343] id=196 dx=-9 dy=-9 yaw=+15 -> success                    peak=51.176mm 
+[198/343] id=197 dx=-6 dy=-9 yaw=+15 -> success                    peak=52.036mm 
+[199/343] id=198 dx=-3 dy=-9 yaw=+15 -> success                    peak=52.136mm 
+[200/343] id=199 dx=+0 dy=-9 yaw=+15 -> success                    peak=52.06mm 
+[201/343] id=200 dx=+3 dy=-9 yaw=+15 -> success                    peak=52.552mm 
+[202/343] id=201 dx=+6 dy=-9 yaw=+15 -> success                    peak=52.795mm 
+[203/343] id=202 dx=+9 dy=-9 yaw=+15 -> success                    peak=53.269mm 
+[204/343] id=203 dx=-9 dy=-6 yaw=+15 -> success                    peak=52.01mm 
+[205/343] id=204 dx=-6 dy=-6 yaw=+15 -> success                    peak=52.19mm 
+[206/343] id=205 dx=-3 dy=-6 yaw=+15 -> success                    peak=52.059mm 
+[207/343] id=206 dx=+0 dy=-6 yaw=+15 -> success                    peak=52.547mm 
+[208/343] id=207 dx=+3 dy=-6 yaw=+15 -> success                    peak=52.785mm 
+[209/343] id=208 dx=+6 dy=-6 yaw=+15 -> success                    peak=52.962mm 
+[210/343] id=209 dx=+9 dy=-6 yaw=+15 -> success                    peak=53.264mm 
+[211/343] id=210 dx=-9 dy=-3 yaw=+15 -> success                    peak=52.246mm 
+[212/343] id=211 dx=-6 dy=-3 yaw=+15 -> success                    peak=51.999mm 
+[213/343] id=212 dx=-3 dy=-3 yaw=+15 -> success                    peak=52.212mm 
+[214/343] id=213 dx=+0 dy=-3 yaw=+15 -> success                    peak=52.504mm 
+[215/343] id=214 dx=+3 dy=-3 yaw=+15 -> success                    peak=52.796mm 
+[216/343] id=215 dx=+6 dy=-3 yaw=+15 -> success                    peak=53.531mm 
+[217/343] id=216 dx=+9 dy=-3 yaw=+15 -> success                    peak=54.413mm 
+[218/343] id=217 dx=-9 dy=+0 yaw=+15 -> success                    peak=52.01mm 
+[219/343] id=218 dx=-6 dy=+0 yaw=+15 -> success                    peak=52.187mm 
+[220/343] id=219 dx=-3 dy=+0 yaw=+15 -> success                    peak=52.847mm 
+[221/343] id=220 dx=+0 dy=+0 yaw=+15 -> success                    peak=53.364mm 
+[222/343] id=221 dx=+3 dy=+0 yaw=+15 -> success                    peak=53.776mm 
+[223/343] id=222 dx=+6 dy=+0 yaw=+15 -> success                    peak=54.45mm 
+[224/343] id=223 dx=+9 dy=+0 yaw=+15 -> hold_failure               peak=43.311mm failed at_least_two_hand_links_touch_pawn,pawn_risen,held_for_full_int
+[225/343] id=224 dx=-9 dy=+3 yaw=+15 -> success                    peak=53.318mm 
+[226/343] id=225 dx=-6 dy=+3 yaw=+15 -> success                    peak=53.418mm 
+[227/343] id=226 dx=-3 dy=+3 yaw=+15 -> success                    peak=53.732mm 
+[228/343] id=227 dx=+0 dy=+3 yaw=+15 -> success                    peak=54.614mm 
+[229/343] id=228 dx=+3 dy=+3 yaw=+15 -> success                    peak=51.33mm 
+[230/343] id=229 dx=+6 dy=+3 yaw=+15 -> hold_failure               peak=45.1mm failed at_least_two_hand_links_touch_pawn,pawn_risen,held_for_full_int
+[231/343] id=230 dx=+9 dy=+3 yaw=+15 -> success                    peak=54.402mm 
+[232/343] id=231 dx=-9 dy=+6 yaw=+15 -> success                    peak=54.331mm 
+[233/343] id=232 dx=-6 dy=+6 yaw=+15 -> success                    peak=53.924mm 
+[234/343] id=233 dx=-3 dy=+6 yaw=+15 -> success                    peak=50.464mm 
+[235/343] id=234 dx=+0 dy=+6 yaw=+15 -> hold_failure               peak=38.634mm failed at_least_two_hand_links_touch_pawn,pawn_risen,held_for_full_int
+[236/343] id=235 dx=+3 dy=+6 yaw=+15 -> success                    peak=54.482mm 
+[237/343] id=236 dx=+6 dy=+6 yaw=+15 -> success                    peak=54.437mm 
+[238/343] id=237 dx=+9 dy=+6 yaw=+15 -> success                    peak=54.313mm 
+[239/343] id=238 dx=-9 dy=+9 yaw=+15 -> success                    peak=49.989mm 
+[240/343] id=239 dx=-6 dy=+9 yaw=+15 -> hold_failure               peak=30.776mm failed at_least_two_hand_links_touch_pawn,pawn_risen,held_for_full_int
+[241/343] id=240 dx=-3 dy=+9 yaw=+15 -> success                    peak=54.486mm 
+[242/343] id=241 dx=+0 dy=+9 yaw=+15 -> success                    peak=54.402mm 
+[243/343] id=242 dx=+3 dy=+9 yaw=+15 -> success                    peak=54.283mm 
+[244/343] id=243 dx=+6 dy=+9 yaw=+15 -> success                    peak=53.77mm 
+[245/343] id=244 dx=+9 dy=+9 yaw=+15 -> lift_failure               peak=0.646mm peak rise 0.6 mm < 30 mm; closure contacts ['right_hand_middle_0_link'
+[246/343] id=245 dx=-9 dy=-9 yaw=+30 -> success                    peak=51.122mm 
+[247/343] id=246 dx=-6 dy=-9 yaw=+30 -> success                    peak=52.134mm 
+[248/343] id=247 dx=-3 dy=-9 yaw=+30 -> success                    peak=52.049mm 
+[249/343] id=248 dx=+0 dy=-9 yaw=+30 -> success                    peak=52.178mm 
+[250/343] id=249 dx=+3 dy=-9 yaw=+30 -> success                    peak=52.643mm 
+[251/343] id=250 dx=+6 dy=-9 yaw=+30 -> success                    peak=52.924mm 
+[252/343] id=251 dx=+9 dy=-9 yaw=+30 -> success                    peak=53.244mm 
+[253/343] id=252 dx=-9 dy=-6 yaw=+30 -> success                    peak=51.983mm 
+[254/343] id=253 dx=-6 dy=-6 yaw=+30 -> success                    peak=52.074mm 
+[255/343] id=254 dx=-3 dy=-6 yaw=+30 -> success                    peak=52.059mm 
+[256/343] id=255 dx=+0 dy=-6 yaw=+30 -> success                    peak=52.235mm 
+[257/343] id=256 dx=+3 dy=-6 yaw=+30 -> success                    peak=52.68mm 
+[258/343] id=257 dx=+6 dy=-6 yaw=+30 -> success                    peak=52.9mm 
+[259/343] id=258 dx=+9 dy=-6 yaw=+30 -> success                    peak=53.2mm 
+[260/343] id=259 dx=-9 dy=-3 yaw=+30 -> success                    peak=52.164mm 
+[261/343] id=260 dx=-6 dy=-3 yaw=+30 -> success                    peak=52.105mm 
+[262/343] id=261 dx=-3 dy=-3 yaw=+30 -> success                    peak=52.178mm 
+[263/343] id=262 dx=+0 dy=-3 yaw=+30 -> success                    peak=52.713mm 
+[264/343] id=263 dx=+3 dy=-3 yaw=+30 -> success                    peak=52.716mm 
+[265/343] id=264 dx=+6 dy=-3 yaw=+30 -> success                    peak=53.546mm 
+[266/343] id=265 dx=+9 dy=-3 yaw=+30 -> success                    peak=54.281mm 
+[267/343] id=266 dx=-9 dy=+0 yaw=+30 -> success                    peak=52.098mm 
+[268/343] id=267 dx=-6 dy=+0 yaw=+30 -> success                    peak=52.288mm 
+[269/343] id=268 dx=-3 dy=+0 yaw=+30 -> success                    peak=52.855mm 
+[270/343] id=269 dx=+0 dy=+0 yaw=+30 -> success                    peak=53.303mm 
+[271/343] id=270 dx=+3 dy=+0 yaw=+30 -> success                    peak=53.812mm 
+[272/343] id=271 dx=+6 dy=+0 yaw=+30 -> success                    peak=54.008mm 
+[273/343] id=272 dx=+9 dy=+0 yaw=+30 -> hold_failure               peak=43.771mm failed at_least_two_hand_links_touch_pawn,pawn_risen,held_for_full_int
+[274/343] id=273 dx=-9 dy=+3 yaw=+30 -> success                    peak=53.312mm 
+[275/343] id=274 dx=-6 dy=+3 yaw=+30 -> success                    peak=53.404mm 
+[276/343] id=275 dx=-3 dy=+3 yaw=+30 -> success                    peak=54.14mm 
+[277/343] id=276 dx=+0 dy=+3 yaw=+30 -> success                    peak=54.517mm 
+[278/343] id=277 dx=+3 dy=+3 yaw=+30 -> success                    peak=51.261mm 
+[279/343] id=278 dx=+6 dy=+3 yaw=+30 -> success                    peak=54.532mm 
+[280/343] id=279 dx=+9 dy=+3 yaw=+30 -> success                    peak=54.394mm 
+[281/343] id=280 dx=-9 dy=+6 yaw=+30 -> success                    peak=54.385mm 
+[282/343] id=281 dx=-6 dy=+6 yaw=+30 -> success                    peak=54.113mm 
+[283/343] id=282 dx=-3 dy=+6 yaw=+30 -> success                    peak=51.282mm 
+[284/343] id=283 dx=+0 dy=+6 yaw=+30 -> hold_failure               peak=43.114mm failed at_least_two_hand_links_touch_pawn,pawn_risen,held_for_full_int
+[285/343] id=284 dx=+3 dy=+6 yaw=+30 -> success                    peak=54.547mm 
+[286/343] id=285 dx=+6 dy=+6 yaw=+30 -> success                    peak=54.307mm 
+[287/343] id=286 dx=+9 dy=+6 yaw=+30 -> success                    peak=54.389mm 
+[288/343] id=287 dx=-9 dy=+9 yaw=+30 -> success                    peak=50.766mm 
+[289/343] id=288 dx=-6 dy=+9 yaw=+30 -> hold_failure               peak=44.66mm failed at_least_two_hand_links_touch_pawn,pawn_risen,held_for_full_int
+[290/343] id=289 dx=-3 dy=+9 yaw=+30 -> success                    peak=54.569mm 
+[291/343] id=290 dx=+0 dy=+9 yaw=+30 -> success                    peak=54.403mm 
+[292/343] id=291 dx=+3 dy=+9 yaw=+30 -> success                    peak=54.311mm 
+[293/343] id=292 dx=+6 dy=+9 yaw=+30 -> success                    peak=54.061mm 
+[294/343] id=293 dx=+9 dy=+9 yaw=+30 -> lift_failure               peak=0.583mm peak rise 0.6 mm < 30 mm; closure contacts ['right_hand_middle_1_link'
+[295/343] id=294 dx=-9 dy=-9 yaw=+45 -> success                    peak=51.131mm 
+[296/343] id=295 dx=-6 dy=-9 yaw=+45 -> success                    peak=52.115mm 
+[297/343] id=296 dx=-3 dy=-9 yaw=+45 -> success                    peak=52.131mm 
+[298/343] id=297 dx=+0 dy=-9 yaw=+45 -> success                    peak=52.141mm 
+[299/343] id=298 dx=+3 dy=-9 yaw=+45 -> success                    peak=52.683mm 
+[300/343] id=299 dx=+6 dy=-9 yaw=+45 -> success                    peak=52.795mm 
+[301/343] id=300 dx=+9 dy=-9 yaw=+45 -> success                    peak=52.832mm 
+[302/343] id=301 dx=-9 dy=-6 yaw=+45 -> success                    peak=52.024mm 
+[303/343] id=302 dx=-6 dy=-6 yaw=+45 -> success                    peak=52.21mm 
+[304/343] id=303 dx=-3 dy=-6 yaw=+45 -> success                    peak=52.07mm 
+[305/343] id=304 dx=+0 dy=-6 yaw=+45 -> success                    peak=52.514mm 
+[306/343] id=305 dx=+3 dy=-6 yaw=+45 -> success                    peak=52.781mm 
+[307/343] id=306 dx=+6 dy=-6 yaw=+45 -> success                    peak=52.88mm 
+[308/343] id=307 dx=+9 dy=-6 yaw=+45 -> success                    peak=53.233mm 
+[309/343] id=308 dx=-9 dy=-3 yaw=+45 -> success                    peak=52.165mm 
+[310/343] id=309 dx=-6 dy=-3 yaw=+45 -> success                    peak=52.022mm 
+[311/343] id=310 dx=-3 dy=-3 yaw=+45 -> success                    peak=52.105mm 
+[312/343] id=311 dx=+0 dy=-3 yaw=+45 -> success                    peak=52.524mm 
+[313/343] id=312 dx=+3 dy=-3 yaw=+45 -> success                    peak=52.753mm 
+[314/343] id=313 dx=+6 dy=-3 yaw=+45 -> success                    peak=53.696mm 
+[315/343] id=314 dx=+9 dy=-3 yaw=+45 -> success                    peak=54.443mm 
+[316/343] id=315 dx=-9 dy=+0 yaw=+45 -> success                    peak=51.866mm 
+[317/343] id=316 dx=-6 dy=+0 yaw=+45 -> success                    peak=52.203mm 
+[318/343] id=317 dx=-3 dy=+0 yaw=+45 -> success                    peak=52.737mm 
+[319/343] id=318 dx=+0 dy=+0 yaw=+45 -> success                    peak=53.326mm 
+[320/343] id=319 dx=+3 dy=+0 yaw=+45 -> success                    peak=53.832mm 
+[321/343] id=320 dx=+6 dy=+0 yaw=+45 -> success                    peak=54.193mm 
+[322/343] id=321 dx=+9 dy=+0 yaw=+45 -> hold_failure               peak=40.285mm failed at_least_two_hand_links_touch_pawn,pawn_risen,held_for_full_int
+[323/343] id=322 dx=-9 dy=+3 yaw=+45 -> success                    peak=52.936mm 
+[324/343] id=323 dx=-6 dy=+3 yaw=+45 -> success                    peak=53.404mm 
+[325/343] id=324 dx=-3 dy=+3 yaw=+45 -> success                    peak=53.811mm 
+[326/343] id=325 dx=+0 dy=+3 yaw=+45 -> success                    peak=54.306mm 
+[327/343] id=326 dx=+3 dy=+3 yaw=+45 -> success                    peak=51.272mm 
+[328/343] id=327 dx=+6 dy=+3 yaw=+45 -> success                    peak=50.407mm 
+[329/343] id=328 dx=+9 dy=+3 yaw=+45 -> success                    peak=54.356mm 
+[330/343] id=329 dx=-9 dy=+6 yaw=+45 -> success                    peak=54.319mm 
+[331/343] id=330 dx=-6 dy=+6 yaw=+45 -> success                    peak=53.954mm 
+[332/343] id=331 dx=-3 dy=+6 yaw=+45 -> success                    peak=51.865mm 
+[333/343] id=332 dx=+0 dy=+6 yaw=+45 -> hold_failure               peak=45.39mm failed at_least_two_hand_links_touch_pawn,pawn_risen,held_for_full_int
+[334/343] id=333 dx=+3 dy=+6 yaw=+45 -> success                    peak=54.52mm 
+[335/343] id=334 dx=+6 dy=+6 yaw=+45 -> success                    peak=54.408mm 
+[336/343] id=335 dx=+9 dy=+6 yaw=+45 -> success                    peak=54.305mm 
+[337/343] id=336 dx=-9 dy=+9 yaw=+45 -> success                    peak=50.842mm 
+[338/343] id=337 dx=-6 dy=+9 yaw=+45 -> hold_failure               peak=40.247mm failed at_least_two_hand_links_touch_pawn,pawn_risen,held_for_full_int
+[339/343] id=338 dx=-3 dy=+9 yaw=+45 -> success                    peak=54.527mm 
+[340/343] id=339 dx=+0 dy=+9 yaw=+45 -> success                    peak=54.454mm 
+[341/343] id=340 dx=+3 dy=+9 yaw=+45 -> success                    peak=54.367mm 
+[342/343] id=341 dx=+6 dy=+9 yaw=+45 -> success                    peak=54.224mm 
+[343/343] id=342 dx=+9 dy=+9 yaw=+45 -> lift_failure               peak=0.58mm peak rise 0.6 mm < 30 mm; closure contacts ['right_hand_thumb_2_link']
+
+Grasp region map (scripted baseline grasp, fixed targets; only the pawn pose varies)
+
+trials: 343  valid: 343  invalid_initial_clearance (excluded): 0
+valid-trial success: 319/343 = 93.0%
+categories: success=319, hold_failure=17, lift_failure=6, grasp_failure=1, sim_error=0, invalid_initial_clearance=0
+
+Legend: S success, h hold_failure, l lift_failure, g grasp_failure, E sim_error, x invalid start
+Axes: columns = dx (mm, along fingers/forward), rows = dy (mm, along palm normal/toward midline)
+
+yaw = -45 deg   (success 46/49)
+  dy\dx    -9    -6    -3    +0    +3    +6    +9
+     +9     S     h     S     S     S     S     g
+     +6     S     S     S     S     S     S     S
+     +3     S     S     S     S     S     S     S
+     +0     S     S     S     S     S     S     h
+     -3     S     S     S     S     S     S     S
+     -6     S     S     S     S     S     S     S
+     -9     S     S     S     S     S     S     S
+
+yaw = -30 deg   (success 46/49)
+  dy\dx    -9    -6    -3    +0    +3    +6    +9
+     +9     S     h     S     S     S     S     l
+     +6     S     S     S     S     S     S     S
+     +3     S     S     S     S     S     S     S
+     +0     S     S     S     S     S     S     h
+     -3     S     S     S     S     S     S     S
+     -6     S     S     S     S     S     S     S
+     -9     S     S     S     S     S     S     S
+
+yaw = -15 deg   (success 48/49)
+  dy\dx    -9    -6    -3    +0    +3    +6    +9
+     +9     S     l     S     S     S     S     S
+     +6     S     S     S     S     S     S     S
+     +3     S     S     S     S     S     S     S
+     +0     S     S     S     S     S     S     S
+     -3     S     S     S     S     S     S     S
+     -6     S     S     S     S     S     S     S
+     -9     S     S     S     S     S     S     S
+
+yaw = 0 deg   (success 45/49)
+  dy\dx    -9    -6    -3    +0    +3    +6    +9
+     +9     S     h     S     S     S     S     l
+     +6     S     S     S     h     S     S     S
+     +3     S     S     S     S     S     S     S
+     +0     S     S     S     S     S     S     h
+     -3     S     S     S     S     S     S     S
+     -6     S     S     S     S     S     S     S
+     -9     S     S     S     S     S     S     S
+
+yaw = 15 deg   (success 44/49)
+  dy\dx    -9    -6    -3    +0    +3    +6    +9
+     +9     S     h     S     S     S     S     l
+     +6     S     S     S     h     S     S     S
+     +3     S     S     S     S     S     h     S
+     +0     S     S     S     S     S     S     h
+     -3     S     S     S     S     S     S     S
+     -6     S     S     S     S     S     S     S
+     -9     S     S     S     S     S     S     S
+
+yaw = 30 deg   (success 45/49)
+  dy\dx    -9    -6    -3    +0    +3    +6    +9
+     +9     S     h     S     S     S     S     l
+     +6     S     S     S     h     S     S     S
+     +3     S     S     S     S     S     S     S
+     +0     S     S     S     S     S     S     h
+     -3     S     S     S     S     S     S     S
+     -6     S     S     S     S     S     S     S
+     -9     S     S     S     S     S     S     S
+
+yaw = 45 deg   (success 45/49)
+  dy\dx    -9    -6    -3    +0    +3    +6    +9
+     +9     S     h     S     S     S     S     l
+     +6     S     S     S     h     S     S     S
+     +3     S     S     S     S     S     S     S
+     +0     S     S     S     S     S     S     h
+     -3     S     S     S     S     S     S     S
+     -6     S     S     S     S     S     S     S
+     -9     S     S     S     S     S     S     S
+
+Success rate by position (all yaws, valid trials only):
+  dx=-9,dy=-9      7/7
+  dx=-9,dy=-6      7/7
+  dx=-9,dy=-3      7/7
+  dx=-9,dy=0       7/7
+  dx=-9,dy=3       7/7
+  dx=-9,dy=6       7/7
+  dx=-9,dy=9       7/7
+  dx=-6,dy=-9      7/7
+  dx=-6,dy=-6      7/7
+  dx=-6,dy=-3      7/7
+  dx=-6,dy=0       7/7
+  dx=-6,dy=3       7/7
+  dx=-6,dy=6       7/7
+  dx=-6,dy=9       0/7
+  dx=-3,dy=-9      7/7
+  dx=-3,dy=-6      7/7
+  dx=-3,dy=-3      7/7
+  dx=-3,dy=0       7/7
+  dx=-3,dy=3       7/7
+  dx=-3,dy=6       7/7
+  dx=-3,dy=9       7/7
+  dx=0,dy=-9       7/7
+  dx=0,dy=-6       7/7
+  dx=0,dy=-3       7/7
+  dx=0,dy=0        7/7
+  dx=0,dy=3        7/7
+  dx=0,dy=6        3/7
+  dx=0,dy=9        7/7
+  dx=3,dy=-9       7/7
+  dx=3,dy=-6       7/7
+  dx=3,dy=-3       7/7
+  dx=3,dy=0        7/7
+  dx=3,dy=3        7/7
+  dx=3,dy=6        7/7
+  dx=3,dy=9        7/7
+  dx=6,dy=-9       7/7
+  dx=6,dy=-6       7/7
+  dx=6,dy=-3       7/7
+  dx=6,dy=0        7/7
+  dx=6,dy=3        6/7
+  dx=6,dy=6        7/7
+  dx=6,dy=9        7/7
+  dx=9,dy=-9       7/7
+  dx=9,dy=-6       7/7
+  dx=9,dy=-3       7/7
+  dx=9,dy=0        1/7
+  dx=9,dy=3        7/7
+  dx=9,dy=6        7/7
+  dx=9,dy=9        1/7
+
+By yaw: -45deg 46/49; -30deg 46/49; -15deg 48/49; 0deg 45/49; 15deg 44/49; 30deg 45/49; 45deg 45/49
+
+Only configurations listed above were tested; nothing is claimed outside the tested ranges (dx -9..9 mm, dy -9..9 mm, yaw -45..45 deg).
+
+wrote /home/batman/robotics/chess2bot/logs/grasp_region_full/grasp_region_trials.csv, grasp_region_summary.json/.txt, grasp_region_map.png

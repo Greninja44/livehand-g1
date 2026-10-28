@@ -117,3 +117,43 @@ Each of the seven right-hand actuators was commanded individually to 50% of each
 - The robot is free-standing (no pelvis weld) with stiff PD control; it stays upright for this ~5 s sequence, but this is not a balance controller.
 - A 31 mm gap between index and middle fingers and a thumb that sweeps in the same plane limit what the Dex3-1 can grasp; larger or lying objects were not explored.
 - Simulated friction/mass values are assumptions. No sim-to-real claims.
+
+
+## Experiment: grasp-region mapping (`scripts/map_grasp_region.py`)
+
+Measures where the **fixed, scripted** baseline grasp works as the pawn pose varies. Each trial is a fresh build and reset that replays the exact `test_chess_grasp.py` sequence (same arm pose, open-hand pose, closing targets, lift, 1.0 s hold). Nothing is re-optimised per trial; actuator gains and physics are unchanged. Only the pawn body moves, after the arm pose and table are fixed from the nominal pose (`grasp_scene.build_scene(pawn_offset_mm=..., pawn_yaw_deg=...)`).
+
+### Run
+```bash
+export MUJOCO_GL=glfw GALLIUM_DRIVER=d3d12 MESA_D3D12_DEFAULT_ADAPTER_NAME=NVIDIA
+python scripts/map_grasp_region.py                    # quick: dx,dy in -6..6 step 3 mm, yaw -30/0/30 = 75 trials (~1.5 min)
+python scripts/map_grasp_region.py --full --out-dir logs/grasp_region_full   # +-9 mm, yaw 0..+-45 step 15 = 343 trials (~7 min)
+# custom: --x-offsets-mm -6,0,6 --y-offsets-mm ... --yaws-deg ... --repeats 3 --shuffle --seed 1 --min-clearance-mm 2
+python scripts/test_map_grasp_region.py               # lightweight checks (grid, symmetry, ordering, classification, aggregation, clearance)
+```
+A baseline gate (nominal grasp + open-finger control) runs first; if it fails the sweep aborts with an error. Outputs go under `logs/` (`--out-dir`): `grasp_region_trials.csv` (one row per trial), `grasp_region_summary.json`, `grasp_region_summary.txt` (grids per yaw), `grasp_region_map.png` (PIL heat-map, no plotting dependency).
+
+### Coordinate convention
+- `dx` (mm): along the right-wrist x axis = the direction the fingers point = world +x (forward).
+- `dy` (mm): along the wrist y axis = palm normal = world +y (toward the robot's midline). Positive dy moves the pawn away from the palm toward the fingertip/thumb side.
+- `dz` is always 0 (the pawn rests on the table). The offset is applied through the wrist rotation at the pre-grasp pose (identity to ~1e-16 there).
+- `yaw` (deg): rotation of the upright pawn about its vertical axis. **The pawn is an axisymmetric cylinder, so yaw does not change its geometry.** Differences between yaw rows are numerical sensitivity of contact generation at marginal grasps, not a physical yaw effect. Yaw is kept as an independent dimension for future non-symmetric pieces.
+
+### Success definition and categories
+Success is exactly the per-trial part of the baseline test (`test_chess_grasp.trial_checks`): finite state, no joint-limit violation, upright robot, at least two right-hand links (not counting the table) touching the pawn at the end, pawn at least 30 mm above its rest height at the end, above 30 mm for the full 1.0 s hold, no table/floor contact during the hold, slip in the wrist frame at most 10 mm.
+- `invalid_initial_clearance`: the pawn starts closer than `--min-clearance-mm` (default 2) to any hand collision geom. Closing is never run; **excluded from the success-rate denominator** and counted separately. It means the placement is geometrically infeasible, not that the grasp failed.
+- `grasp_failure`: no hand contact after closure. `lift_failure`: peak rise never reached 30 mm. `hold_failure`: it rose past 30 mm but a hold criterion failed (typically the pawn was dropped). `sim_error`: exception, non-finite state, joint-limit or balance violation.
+- CSV columns include trial id, seed (informational: the simulation is deterministic and uses no randomness; only `--shuffle` uses the seed), offsets, initial minimum clearance, closure/hand-contact flags, peak height above the table-rest height, threshold/hold flags, slip, max pawn acceleration (same definition as the baseline: max per-step |dv|/dt of the pawn, m/s^2), final contacting links, category and diagnostic.
+
+### Observed results (only the tested ranges)
+- Quick grid (dx,dy ±6 mm, yaw ±30°): **73/75 valid trials succeeded (97.3%)**, 0 invalid. The two failures were at (dx=0, dy=+6) for yaw 0° and +30°: the pawn rose 34–43 mm and then fell to the floor.
+- Full grid (dx,dy ±9 mm, yaw 0..±45°): **319/343 (93.0%)**, 0 invalid (minimum start clearance 13.7 mm). Failures: 17 hold, 6 lift, 1 grasp.
+- The working region is the central ~±6 mm square in dx and dy, with its reliable edge at about dy ≤ +3 mm and dx ≤ +6 mm. Failures concentrate on the +dx edge (pawn 9 mm farther along the fingers, at dy=0 and dy=+9) and the +dy edge (dy +6/+9, mostly at dx = 0 or −6). Negative dy (toward the palm) succeeded at every tested dx and yaw down to −9 mm.
+- Nothing is claimed beyond ±9 mm, upright pawn, this one hand/arm pose, this table, this mass and friction. Sparse isolated failures inside the region (e.g. dx=+6, dy=+3 at yaw 15° only) show the boundary is ragged, not a clean contour.
+- Repeats are bit-identical (determinism checked with `--repeats 2 --shuffle`), so repeated trials add no statistical information unless noise is added.
+
+
+## LiveHand-G1 (webcam hand -> simulated G1 + Dex3-1)
+Real-time hand retargeting lives in `livehand/` (own env: `.venv-livehand`, deps in `requirements-livehand.txt`). Run
+`.venv-livehand/bin/python -m livehand`; see `livehand/README.md` for install, keys, mapping, safety behaviour, tests and the
+manual steps to attach your webcam to WSL (not testable from this session).

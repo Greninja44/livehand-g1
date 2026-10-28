@@ -2,3 +2,8 @@
 __pycache__/
 *.pyc
 models/mujoco_menagerie/
+.venv-livehand/
+livehand/calibration.json
+livehand/models/hand_landmarker.task
+models/unitree_ros_probe/
+__pycache__/

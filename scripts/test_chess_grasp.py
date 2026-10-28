@@ -34,7 +34,26 @@ CONFIG = dict(
 nm = lambda m, t, i: mujoco.mj_id2name(m, t, i)
 
 
-def run_sequence(params, close=True, snapshots=None):
+def trial_checks(met):
+    """Per-trial pass/fail checks (the success definition shared with scripts/map_grasp_region.py)."""
+    c = CONFIG
+    return dict(
+        finite_state=not met["nonfinite_state"],
+        no_initial_penetration=len(met["init_pawn_penetrations"]) == 0,
+        no_joint_limit_violation=met["joint_limit_violation_steps"] == 0,
+        robot_upright=met["min_pelvis_upright"] > 0.95,
+        no_equality_constraints=True,
+        at_least_two_hand_links_touch_pawn=len(met["finger_links_in_contact_at_end"]) >= 2,
+        pawn_risen=met["rise"] >= c["success_min_rise"],
+        held_for_full_interval=met["hold_time_above_threshold_s"] >= c["t_hold"] - 1e-9,
+        no_table_or_floor_contact_in_hold=met["hold_samples_with_table_or_floor_contact"] == 0,
+        no_slip_in_hand=met["hold_slip_m"] <= c["success_max_slip"],
+    )
+
+
+def run_sequence(params, close=True, snapshots=None, min_clearance=None):
+    """Fresh build + reset + full sequence. If min_clearance (m) is given and the pawn starts closer than that
+    to any hand collision geom, returns early with met['invalid_initial_clearance']=True (no closing is run)."""
     c = CONFIG
     m, d, info = gs.build_scene(params)
     assert m.neq == 0, "model must have no equality constraints (no welds)"
@@ -65,6 +84,10 @@ def run_sequence(params, close=True, snapshots=None):
                 dist = mujoco.mj_geomDistance(m, d, pawn_geom, g, 0.5, None)
                 clearance[b] = min(clearance.get(b, 9.0), float(dist))
 
+    if min_clearance is not None and min(clearance.values()) < min_clearance:
+        return dict(invalid_initial_clearance=True, init_clearance_to_hand_m=clearance,
+                    init_pawn_penetrations=init_pen, pawn_initial_world=d.qpos[pq:pq + 3].tolist()), [], info
+
     key2, _ = gs.solve_pregrasp({**info["params"], "grasp_world_z": info["params"]["grasp_world_z"] + c["lift_height"]})
     arm0 = info["ctrl0"][arm_act].copy()
     arm1 = np.array([key2[qadr(n)] for n in gs.ARM])
@@ -72,7 +95,7 @@ def run_sequence(params, close=True, snapshots=None):
     close_t = np.array(c["finger_close"]) if close else open_t
     ctrl = info["ctrl0"].copy()
     rows = []
-    st = dict(max_acc=0.0, nonfinite=False, limit_viol=0, min_up=1.0, hold_support=0, prev_v=d.qvel[pv:pv + 3].copy())
+    st = dict(peak_z=-9.0, max_acc=0.0, nonfinite=False, limit_viol=0, min_up=1.0, hold_support=0, prev_v=d.qvel[pv:pv + 3].copy())
     hinge = [j for j in range(m.njnt) if m.jnt_type[j] == mujoco.mjtJoint.mjJNT_HINGE]
     jlo, jhi = m.jnt_range[hinge, 0], m.jnt_range[hinge, 1]
 
@@ -98,6 +121,7 @@ def run_sequence(params, close=True, snapshots=None):
             if not (np.isfinite(d.qpos).all() and np.isfinite(d.qvel).all()):
                 st["nonfinite"] = True
                 return
+            st["peak_z"] = max(st["peak_z"], float(d.qpos[pq + 2]))
             v = d.qvel[pv:pv + 3]
             st["max_acc"] = max(st["max_acc"], float(np.linalg.norm(v - st["prev_v"]) / dt)); st["prev_v"] = v.copy()
             st["min_up"] = min(st["min_up"], float(d.xmat[1].reshape(3, 3)[2, 2]))
@@ -119,6 +143,7 @@ def run_sequence(params, close=True, snapshots=None):
             save_png(m, d, snapshots[tag], lookat=d.site_xpos[site], distance=0.45, azimuth=150, elevation=-20)
 
     mujoco.mj_forward(m, d)
+    pawn_init = d.qpos[pq:pq + 3].copy()
     snap("init")
     run("settle_open", c["t_settle"], keep)
     z_rest = float(d.qpos[pq + 2])
@@ -164,6 +189,9 @@ def run_sequence(params, close=True, snapshots=None):
         min_pelvis_upright=st["min_up"], final_pelvis_z=float(d.qpos[2]),
         init_pawn_penetrations=init_pen, init_clearance_to_hand_m=clearance,
         sim_time=float(d.time),
+        invalid_initial_clearance=False, peak_z=st["peak_z"], peak_rise=st["peak_z"] - z_rest,
+        pawn_initial_world=pawn_init.tolist(), closure_hand_contacts=sorted(
+            {x["body"] for x in contacts_closed if x["body"].startswith("right_")}),
     )
     return met, rows, info
 
@@ -196,16 +224,7 @@ def main():
     print(f"max spread of final pawn position across runs: {spread:.3e} m")
 
     checks = dict(
-        finite_state=not met["nonfinite_state"],
-        no_initial_penetration=len(met["init_pawn_penetrations"]) == 0,
-        no_joint_limit_violation=met["joint_limit_violation_steps"] == 0,
-        robot_upright=met["min_pelvis_upright"] > 0.95,
-        no_equality_constraints=True,
-        at_least_two_hand_links_touch_pawn=len(met["finger_links_in_contact_at_end"]) >= 2,
-        pawn_risen=met["rise"] >= c["success_min_rise"],
-        held_for_full_interval=met["hold_time_above_threshold_s"] >= c["t_hold"] - 1e-9,
-        no_table_or_floor_contact_in_hold=met["hold_samples_with_table_or_floor_contact"] == 0,
-        no_slip_in_hand=met["hold_slip_m"] <= c["success_max_slip"],
+        **trial_checks(met),
         control_does_not_lift=ctl["rise"] < 0.01,
         reproducible=spread < 1e-6,
     )

@@ -23,6 +23,11 @@ DEFAULTS = dict(
     obj_radius=0.012, obj_height=0.045, obj_mass=0.010, obj_friction=(1.2, 0.01, 0.001),
     obj_hand_xy=(0.1452, 0.0447),
     open_pose=(-0.07, 0.43, 0, 0, 0, 0, 0),   # right-hand joint angles (FINGERS order) at reset; also the initial ctrl          # object axis position in the hand frame (x, y)
+    # pawn placement variation (grasp-region mapping). Applied AFTER the arm pose and table are fixed from
+    # the nominal pose, so only the pawn moves. Offsets are in the right-wrist frame (x along the fingers,
+    # y along the palm normal); at the pre-grasp pose that frame is aligned with the world axes. Yaw is about
+    # the vertical axis through the pawn centre.
+    pawn_offset_mm=(0.0, 0.0), pawn_yaw_deg=0.0,
     table_top_hand_z=-0.047,           # table surface in hand z: below the lowest finger-hull point (-0.042)
     # where the grasp site should be in the world for the pre-grasp (hand z up, x forward)
     grasp_world_xy=(0.30, -0.16),
@@ -34,7 +39,21 @@ def _jid(m, n):
     return mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_JOINT, n)
 
 
+_IK_CACHE = {}
+_IK_KEYS = ("obj_hand_xy", "table_top_hand_z", "obj_height", "grasp_world_xy", "grasp_world_z")
+
+
 def solve_pregrasp(params, iters=400):
+    """Cached wrapper (the IK is deterministic and depends only on _IK_KEYS)."""
+    p = {**DEFAULTS, **params}
+    key = tuple((k, tuple(np.atleast_1d(p[k]).tolist())) for k in _IK_KEYS)
+    if key not in _IK_CACHE:
+        _IK_CACHE[key] = _solve_pregrasp(params, iters)
+    q, rep = _IK_CACHE[key]
+    return q.copy(), dict(rep)
+
+
+def _solve_pregrasp(params, iters=400):
     """IK for the 7 right-arm joints so the wrist frame has x=world +x, z=world up and the
     hand-frame point `grasp site` is at the requested world position. Returns (qpos_keyframe, report)."""
     p = {**DEFAULTS, **params}
@@ -98,7 +117,13 @@ def build_scene(params=None, with_object=True):
         tb = wb.add_body(name="table", pos=[tx0 + 0.20, obj_pos[1], table_top - 0.02])
         tb.add_geom(name="table_geom", type=mujoco.mjtGeom.mjGEOM_BOX, size=[0.20, 0.30, 0.02],
                     friction=[1.0, 0.005, 0.0001], rgba=[0.55, 0.4, 0.25, 1])
-        ob = wb.add_body(name="pawn", pos=obj_pos.tolist())
+        # pawn pose = nominal + wrist-frame (x, y) offset (z unchanged: it rests on the table) + yaw
+        R_w = d0.xmat[mujoco.mj_name2id(m0, mujoco.mjtObj.mjOBJ_BODY, "right_wrist_yaw_link")].reshape(3, 3)
+        off = R_w @ np.array([p["pawn_offset_mm"][0] / 1000.0, p["pawn_offset_mm"][1] / 1000.0, 0.0])
+        pawn_pos = obj_pos + np.array([off[0], off[1], 0.0])
+        yaw = np.deg2rad(p["pawn_yaw_deg"])
+        pawn_quat = [float(np.cos(yaw / 2)), 0.0, 0.0, float(np.sin(yaw / 2))]
+        ob = wb.add_body(name="pawn", pos=pawn_pos.tolist(), quat=pawn_quat)
         ob.add_freejoint(name="pawn_free")
         ob.add_geom(name="pawn_geom", type=mujoco.mjtGeom.mjGEOM_CYLINDER,
                     size=[p["obj_radius"], p["obj_height"] / 2, 0], mass=p["obj_mass"],
@@ -109,10 +134,11 @@ def build_scene(params=None, with_object=True):
     qpos = np.zeros(m.nq)
     qpos[:len(key_q)] = key_q
     if with_object:
-        qpos[len(key_q):len(key_q) + 7] = [*obj_pos, 1, 0, 0, 0]
+        qpos[len(key_q):len(key_q) + 7] = [*pawn_pos, *pawn_quat]
     for n, v in zip(FINGERS, p["open_pose"]):
         qpos[m.jnt_qposadr[_jid(m, n)]] = v
-    return m, d, dict(qpos0=qpos, ctrl0=_ctrl_from_qpos(m, qpos), obj_pos=obj_pos, ik=rep, params=p,
+    return m, d, dict(qpos0=qpos, ctrl0=_ctrl_from_qpos(m, qpos), obj_pos=obj_pos,
+                      pawn_pos=pawn_pos if with_object else None, ik=rep, params=p,
                       site_hand=site_hand)
 
 
