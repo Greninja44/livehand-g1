@@ -16,10 +16,25 @@ def map_position(palm_uv, size, cal, cfg):
         return np.zeros(3)
     u, v = np.asarray(palm_uv, float) - np.asarray(cal.palm_uv0, float)
     s = np.log(size / cal.size0)
-    cue = _deadzone([u, v, s], cfg.position.deadzone) * np.array([cfg.position.gain, cfg.position.gain, cfg.position.depth_gain])
+    cue = _deadzone([u, v, s], cfg.position.deadzone) * cue_gains(cal, cfg)
     delta = np.asarray(cfg.position.axis_map, float) @ cue
     half = np.asarray(cfg.position.workspace_half_extent, float)
     return np.clip(delta, -half, half)
+
+
+def cue_gains(cal, cfg):
+    """Metres per unit of each cue [u, v, s]. Config gains, or -- after a range capture -- the gain that maps the
+    user's comfortable span onto the workspace half-extent of the robot axis that cue drives, bounded to
+    [range_gain_min, range_gain_max] x the config gain."""
+    p = cfg.position
+    base = np.array([p.gain, p.gain, p.depth_gain], float)
+    if cal.cue_span is None:
+        return base
+    A = np.abs(np.asarray(p.axis_map, float))
+    half = np.asarray(p.workspace_half_extent, float)
+    span = np.maximum(np.asarray(cal.cue_span, float) - p.deadzone, 1e-6)
+    want = (A.T @ half) / np.maximum(A.sum(0), 1e-9) / span    # each cue's (mean) target half-extent / span
+    return np.clip(want, base * p.range_gain_min, base * p.range_gain_max)
 
 
 def _rotvec(R):
@@ -62,35 +77,34 @@ def smoothstep(x, a, b):
 
 
 class HandRetargeter:
-    """Dex3-1 mapping. Actuator order (cfg.hand.open/fist/pinch): thumb_0, thumb_1, thumb_2, index_0, index_1,
-    middle_0, middle_1. Human cues (normalised 0..1 with calibration):
-      index curl                                 -> index_0, index_1   (open -> fist pose)
-      mean(middle, ring, pinky curl)             -> middle_0, middle_1 (the robot has no ring/pinky)
-      thumb curl                                 -> thumb_0..2         (open -> fist pose)
-      thumb-index pinch (suppressed in a fist)   -> blend thumb_0..2 and index_0/1 toward the pinch pose
+    """Gesture -> hand actuator targets for one hand profile (config [hand.<model>]).
+    Human cues, normalised 0..1 with calibration: index, middle, ring, pinky curl; rest = mean(middle, ring, pinky);
+    thumb curl; thumb-index pinch. Each actuator k is driven by cue drive[k] from its open toward its fist value;
+    then the actuators in pinch_mask blend toward the pinch pose by the pinch cue (suppressed when `rest` is curled,
+    so a fist is not read as a pinch). Targets are convex combinations of the model-derived poses.
+      dex3     thumb_0..2 <- thumb, index_0/1 <- index, middle_0/1 <- rest (no ring/pinky); pinch: thumb + index
+      inspire  thumb yaw, thumb pitch <- thumb, index/middle/ring/pinky <- own finger; pinch: thumb yaw/pitch + index
     """
 
-    def __init__(self, cfg, ctrl_lo, ctrl_hi):
-        h = cfg.hand
-        self.open, self.fist, self.pinch = (np.array(x, float) for x in (h.open, h.fist, h.pinch))
+    def __init__(self, profile, ctrl_lo, ctrl_hi, max_fraction):
+        p = profile
+        self.open, self.fist, self.pinch = (np.array(x, float) for x in (p.open, p.fist, p.pinch))
+        self.drive = list(p.drive)
+        self.pinch_mask = np.array(p.pinch_mask, bool)
         self.lo, self.hi = np.asarray(ctrl_lo, float), np.asarray(ctrl_hi, float)
-        self.max_fraction = h.max_fraction
+        self.max_fraction = max_fraction
+        assert len(self.drive) == len(self.open) == len(self.lo), "hand profile length must match the actuator count"
 
     def cues(self, state, cal):
         c = {f: curl_norm(cal, f, state.curl_raw[f]) for f in FINGERS}
-        return dict(index=c["index"], middle=float(np.mean([c["middle"], c["ring"], c["pinky"]])),
+        return dict(**c, rest=float(np.mean([c["middle"], c["ring"], c["pinky"]])),
                     thumb=thumb_norm(cal, state.thumb_raw), pinch=pinch_norm(cal, state.pinch_raw))
 
     def targets(self, cues):
-        idx, mid, th, p = cues["index"], cues["middle"], cues["thumb"], cues["pinch"]
-        p_eff = p * (1.0 - smoothstep(mid, 0.5, 0.9))
-        lerp = lambda a, b, t: a + (b - a) * t
-        q = self.open.copy()
-        q[0:3] = lerp(self.open[0:3], self.fist[0:3], th)
-        q[3:5] = lerp(self.open[3:5], self.fist[3:5], idx)
-        q[5:7] = lerp(self.open[5:7], self.fist[5:7], mid)
-        q[0:3] = lerp(q[0:3], self.pinch[0:3], p_eff)
-        q[3:5] = lerp(q[3:5], self.pinch[3:5], p_eff)
+        p_eff = cues["pinch"] * (1.0 - smoothstep(cues["rest"], 0.5, 0.9))
+        t = np.array([cues[k] for k in self.drive])
+        q = self.open + (self.fist - self.open) * t
+        q = np.where(self.pinch_mask, q + (self.pinch - q) * p_eff, q)
         return self.clamp(q)
 
     def clamp(self, q):

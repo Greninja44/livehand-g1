@@ -22,7 +22,8 @@ class Calibration:
     thumb_closed: float = PRIOR["thumb_closed"]
     pinch_open: float = PRIOR["pinch_open"]
     pinch_closed: float = PRIOR["pinch_closed"]
-    done: dict = field(default_factory=lambda: dict(neutral=False, open=False, fist=False, pinch=False))
+    cue_span: list = None           # [u, v, s] comfortable motion range from neutral (range capture); None = config gains
+    done: dict = field(default_factory=lambda: dict(neutral=False, range=False, open=False, fist=False, pinch=False))
 
     @property
     def has_neutral(self):
@@ -33,12 +34,35 @@ class Calibration:
 
     @classmethod
     def load(cls, path):
-        d = json.loads(Path(path).read_text())
+        return cls.from_dict(json.loads(Path(path).read_text()))
+
+    @classmethod
+    def from_dict(cls, d):
         c = cls()
         for k, v in d.items():
-            if hasattr(c, k):
+            if k == "done":
+                c.done.update(v)            # files saved before a capture kind existed keep its default
+            elif hasattr(c, k):
                 setattr(c, k, v)
         return c
+
+    def update_from(self, other):
+        """Copy another calibration's values in place (the Calibrator keeps a reference to this object)."""
+        self.__dict__.update({k: v for k, v in other.__dict__.items() if k != "done"})
+        self.done.clear(); self.done.update(other.done)
+
+
+def save_set(path, cals):
+    """Save {side: Calibration} as {"right": {...}, "left": {...}}."""
+    Path(path).write_text(json.dumps({s: asdict(c) for s, c in cals.items()}, indent=2))
+
+
+def load_set(path, sides):
+    """Load {side: Calibration} for `sides`. A pre-two-hand file (one flat calibration) applies to sides[0]."""
+    d = json.loads(Path(path).read_text())
+    if "done" in d:
+        d = {sides[0]: d}
+    return {s: Calibration.from_dict(d[s]) if s in d else Calibration() for s in sides}
 
 
 def norm01(x, lo_val, hi_val):
@@ -62,10 +86,11 @@ def pinch_norm(cal, raw):
 
 
 class Calibrator:
-    """Averages `samples` valid frames per capture. kinds: neutral | open | fist | pinch."""
+    """Averages `samples` valid frames per capture. kinds: neutral | open | fist | pinch.
+    'range' collects `range_samples` frames while the user sweeps the hand around neutral (needs neutral first)."""
 
-    def __init__(self, cal: Calibration, samples=20):
-        self.cal, self.samples = cal, samples
+    def __init__(self, cal: Calibration, samples=20, range_samples=60):
+        self.cal, self.samples, self.range_samples = cal, samples, range_samples
         self.kind = None
         self._acc = []
 
@@ -74,12 +99,20 @@ class Calibrator:
         return self.kind is not None
 
     @property
+    def _need(self):
+        return self.range_samples if self.kind == "range" else self.samples
+
+    @property
     def progress(self):
-        return len(self._acc) / self.samples if self.kind else 0.0
+        return len(self._acc) / self._need if self.kind else 0.0
 
     def start(self, kind):
-        assert kind in ("neutral", "open", "fist", "pinch")
+        """Begin a capture. Returns False (and does nothing) if 'range' is requested before 'neutral'."""
+        assert kind in ("neutral", "range", "open", "fist", "pinch")
+        if kind == "range" and not self.cal.has_neutral:
+            return False
         self.kind, self._acc = kind, []
+        return True
 
     def cancel(self):
         self.kind, self._acc = None, []
@@ -89,11 +122,14 @@ class Calibrator:
         if not self.kind or state is None or not state.tracked:
             return None
         self._acc.append(state)
-        if len(self._acc) < self.samples:
+        if len(self._acc) < self._need:
             return None
         s, c, kind = self._acc, self.cal, self.kind
         mean = lambda f: float(np.mean([f(x) for x in s]))
-        if kind == "neutral":
+        if kind == "range":
+            dev = np.array([[*(np.asarray(x.palm_uv) - c.palm_uv0), np.log(x.size / c.size0)] for x in s])
+            c.cue_span = np.percentile(np.abs(dev), 95, axis=0).tolist()   # robust to a few outlier frames
+        elif kind == "neutral":
             c.palm_uv0 = np.mean([x.palm_uv for x in s], 0).tolist()
             c.size0 = mean(lambda x: x.size)
             R = np.mean([x.R_palm for x in s], 0)
