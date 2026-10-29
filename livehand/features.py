@@ -40,12 +40,13 @@ def _unit(v):
     return v / n if n > 1e-9 else v
 
 
-def palm_rotation(w, handedness="Right"):
-    """Palm frame from world landmarks: x along the fingers, y = palm normal, z = x cross y (camera coords)."""
+def palm_rotation(w):
+    """Palm frame from world landmarks: x along the fingers, y = palm normal, z = x cross y (camera coords).
+    The normal's sign deliberately ignores MediaPipe's handedness label: the label flickers on real video (measured
+    16/200 frames on this camera), and a flip would rotate the frame 180 deg about x. Orientation is only used relative
+    to the neutral capture of the same hand, where a constant sign convention cancels out."""
     x = _unit(w[MIDDLE_MCP] - w[WRIST])
     n = np.cross(w[INDEX_MCP] - w[WRIST], w[PINKY_MCP] - w[WRIST])
-    if handedness == "Left":
-        n = -n
     y = _unit(n - np.dot(n, x) * x)
     z = np.cross(x, y)
     return np.stack([x, y, z], axis=1)
@@ -63,7 +64,7 @@ def extract(img_lm, world_lm, handedness="Right", score=1.0, aspect=4 / 3):
     size_img = np.linalg.norm((img_lm[MIDDLE_MCP, :2] - img_lm[WRIST, :2]) * np.array([aspect, 1.0]))
     return HandState(
         tracked=True, handedness=handedness, score=float(score), palm_uv=uv, size=float(size_img),
-        R_palm=palm_rotation(w, handedness),
+        R_palm=palm_rotation(w),
         curl_raw={k: float(np.linalg.norm(w[i] - w[WRIST]) / size_w) for k, i in FINGER_TIPS.items()},
         thumb_raw=float(np.linalg.norm(w[THUMB_TIP] - w[PINKY_MCP]) / size_w),
         pinch_raw=float(np.linalg.norm(w[THUMB_TIP] - w[INDEX_TIP]) / size_w),
@@ -76,8 +77,8 @@ _MCP = dict(index=(-0.015, 0.075), middle=(0.0, 0.080), ring=(0.015, 0.074), pin
 _FIRST = dict(index=5, middle=9, ring=13, pinky=17)
 
 
-def synthetic_hand(curl=(0, 0, 0, 0), thumb=0.0, pinch=0.0, R=None, center=(0.5, 0.5), scale=1.0, aspect=4 / 3):
-    """21 world landmarks (m) and image landmarks for a parametric right hand.
+def synthetic_hand(curl=(0, 0, 0, 0), thumb=0.0, pinch=0.0, R=None, center=(0.5, 0.5), scale=1.0, aspect=4 / 3, left=False):
+    """21 world landmarks (m) and image landmarks for a parametric right hand (left=True: its mirror image).
     curl: index, middle, ring, pinky in [0,1]; thumb in [0,1]; pinch in [0,1] (thumb tip -> index tip)."""
     R = np.eye(3) if R is None else np.asarray(R, float)
     p = np.zeros((21, 3))   # hand-local: x right, y along fingers (palm plane y-z), palm normal -z (toward camera)
@@ -103,6 +104,8 @@ def synthetic_hand(curl=(0, 0, 0, 0), thumb=0.0, pinch=0.0, R=None, center=(0.5,
         for j in (2, 3, 4):
             k = pinch * (0.3 if j == 2 else 0.65 if j == 3 else 1.0)
             p[j] = p[j] * (1 - k) + p[INDEX_TIP] * k
+    if left:
+        p[:, 0] = -p[:, 0]
     world = (p @ R.T) * scale
     img = np.zeros((21, 3))
     img[:, 0] = center[0] + world[:, 0] / aspect * 2.0

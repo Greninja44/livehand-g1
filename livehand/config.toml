@@ -1,34 +1,46 @@
 # LiveHand-G1 configuration. All lengths in metres, angles in radians unless the key says deg.
 
+[robot]
+model = "inspire"        # "inspire": G1 + 5-finger Inspire RH56DFQ hands (both arms; scripts/inspire_scene.py)
+                         # "dex3":    Menagerie G1 + 3-finger Dex3-1 hands (right arm only; scripts/grasp_scene.py)
+sides = ["right", "left"]   # robot arms to drive; your right hand drives the robot's right arm. Sides the model
+                            # does not support are ignored (dex3: right only).
+
 [camera]
 source = "camera"        # "camera" (webcam or video file path) or "synthetic" (scripted fake hand, no camera)
 device = "0"             # camera index ("0", "1", ...) or a video file path
 width = 640
 height = 480
 fps = 30
-mirror = true            # selfie view; MediaPipe handedness labels assume a mirrored image
+mirror = true            # selfie view (preview moves like a mirror). Handedness labels are converted to your real hand.
+auto_exposure_priority = false   # false: keep auto-exposure but forbid it from lowering the frame rate (V4L2
+                                 # exposure_auto_priority=0; restored on exit). Dim room: 5 fps -> 15 fps measured.
 
 [tracking]
 model_path = "models/hand_landmarker.task"   # relative to this directory (official MediaPipe model)
 min_detection_confidence = 0.5
 min_presence_confidence = 0.5
 min_tracking_confidence = 0.5
-preferred_hand = "any"   # "Right" | "Left" | "any" (label from the mirrored image = the user's own hand)
+preferred_hand = "any"   # one robot side only: "Right" | "Left" | "any" (your real hand) drives it.
+                         # Two sides: both hands are tracked; each goes to its own arm (see tracking.assign_hands).
 
 [filter]                 # One-Euro filters on the measurements (lower min_cutoff = smoother, more lag)
 pos_min_cutoff = 1.5
 pos_beta = 8.0
-curl_min_cutoff = 2.0
-curl_beta = 4.0
+curl_min_cutoff = 1.0    # tuned on a real webcam clip: open-hand index-cue peak 0.22 -> 0.14,
+curl_beta = 1.0          # open->fist step still reaches 90% in ~100 ms at 15 fps
 
 [calibration]
 file = "calibration.json"
 samples = 20             # valid frames averaged per calibration capture
+range_samples = 60       # valid frames collected while you sweep your hand for the range capture (~4 s at 15 fps)
 
 [position]
 gain = 0.45              # robot metres per camera frame-height of palm motion
 depth_gain = 0.25        # robot metres per unit of ln(apparent hand size ratio); NOT metric depth
 deadzone = 0.01          # ignore tiny motions (frame-height units / ln-size)
+range_gain_min = 0.33    # after a range capture (key m) gains are rescaled so your sweep spans the workspace,
+range_gain_max = 3.0     # but never below/above these multiples of gain / depth_gain
 # rows = robot axes (x forward, y left, z up); columns = human cues [u (screen right), v (screen down), s (toward camera)]
 axis_map = [[0.0, 0.0, 1.0],
             [-1.0, 0.0, 0.0],
@@ -47,8 +59,7 @@ axis_map = [[0.0, 0.0, -1.0],
             [-1.0, 0.0, 0.0],
             [0.0, -1.0, 0.0]]
 
-[arm]
-site = "grasp_site"      # palm point on right_wrist_yaw_link (defined by scripts/grasp_scene.py)
+[arm]                    # controlled point per model is fixed in sim.MODELS: dex3 grasp_site, inspire R_palm / L_palm
 damping = 0.05
 max_damping = 0.25
 singularity_eps = 0.02
@@ -59,14 +70,30 @@ rot_weight = 0.5
 max_pos_error = 0.05     # m, clamp on the IK error per tick (bounds speed)
 
 [hand]
-side = "right"
-# [thumb_0, thumb_1, thumb_2, index_0, index_1, middle_0, middle_1] -- derived with livehand/tools/find_hand_poses.py
-open  = [-0.07, 0.43, 0.0, 0.0, 0.0, 0.0, 0.0]
-fist  = [0.0, -0.9, -1.2, 1.4, 1.5, 1.4, 1.5]
-pinch = [-0.469, 0.037, -1.363, 0.913, 1.479, 0.0, 0.0]   # only thumb and index entries are used
 max_fraction = 0.9       # never command beyond this fraction of an actuator's range
 slew_rate = 4.0          # rad/s per finger actuator
 enabled = true
+# Per-model profiles. drive[k] = human cue moving actuator k from open toward fist (index, middle, ring, pinky,
+# rest = mean of middle/ring/pinky, thumb); pinch_mask[k] = actuator k also blends toward the pinch pose.
+
+[hand.dex3]
+# [thumb_0, thumb_1, thumb_2, index_0, index_1, middle_0, middle_1] -- derived with livehand/tools/find_hand_poses.py
+drive = ["thumb", "thumb", "thumb", "index", "index", "rest", "rest"]
+pinch_mask = [true, true, true, true, true, false, false]
+open  = [-0.07, 0.43, 0.0, 0.0, 0.0, 0.0, 0.0]
+fist  = [0.0, -0.9, -1.2, 1.4, 1.5, 1.4, 1.5]
+pinch = [-0.469, 0.037, -1.363, 0.913, 1.479, 0.0, 0.0]
+
+[hand.inspire]
+# [thumb_proximal_yaw, thumb_proximal_pitch, index, middle, ring, pinky (proximal joints)]; same values both hands
+# -- derived with livehand/tools/find_inspire_poses.py
+drive = ["thumb", "thumb", "index", "middle", "ring", "pinky"]
+pinch_mask = [true, true, true, false, false, false]
+# Thumb pitch is usable only to 0.5 rad (its mimic joints hit their limits). Checked on both hands: no new
+# self-penetration; pinch thumb/index tip gap 10.2 mm (R) / 12.9 mm (L); fist thumb clears the fingers.
+open  = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+fist  = [0.315, 0.425, 1.53, 1.53, 1.53, 1.53]
+pinch = [1.17, 0.275, 0.79, 0.0, 0.0, 0.0]
 
 [safety]
 stale_timeout = 0.25     # s without a fresh valid hand packet => hold
@@ -74,6 +101,7 @@ lost_return_after = 3.0  # s of tracking loss before drifting back to home / ope
 max_target_jump = 0.20   # m: a raw mapped-target jump larger than this between packets is rejected
 reacquire_frames = 3     # consecutive valid frames before tracking resumes
 arm_slew_margin = 1.5    # actuator slew limit = this x max_joint_velocity
+min_hand_separation = 0.16   # m, two-arm mode: palms are kept at least this far apart sideways (no arm/hand clash)
 
 [sim]
 control_hz = 100

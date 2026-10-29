@@ -1,0 +1,31 @@
+{
+  "device": "0",
+  "devices": [
+    {
+      "device": "/dev/video0",
+      "name": "Integrated Camera: Integrated C",
+      "rw": true,
+      "exposure_auto_priority": 1
+    },
+    {
+      "device": "/dev/video1",
+      "name": "Integrated Camera: Integrated C",
+      "rw": true,
+      "exposure_auto_priority": null
+    }
+  ],
+  "seconds": 6.0,
+  "frames_captured": 85,
+  "states": 85,
+  "cam_fps": 15.5,
+  "infer_fps": 15.6,
+  "infer_ms_median": 9.4,
+  "capture_to_state_ms_median": 10.0,
+  "capture_to_state_ms_p95": 15.6,
+  "hand_detect_rate": 0.0,
+  "handedness": {},
+  "error": "",
+  "recorded": null,
+  "record_fps": null,
+  "threads_stopped": true
+}

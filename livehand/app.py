@@ -1,24 +1,35 @@
 """Entry point: `python -m livehand`. Wires vision threads, the MuJoCo loop (main thread), preview window and keys."""
 import argparse
+import os
 import signal
 import sys
 import time
 from pathlib import Path
 
+# Native Ubuntu (GNOME/Wayland) defaults, set before cv2/glfw load; export the variables yourself to override.
+# The glfw wheel defaults to its Wayland build, whose MuJoCo window gets no title bar here (libdecor fails), while
+# OpenCV's bundled Qt already runs through XWayland -- so put both windows on X11. Qt in the cv2 wheel ships no fonts.
+if os.environ.get("DISPLAY"):
+    os.environ.setdefault("PYGLFW_LIBRARY_VARIANT", "x11")
+_FONTDIR = os.environ.get("QT_QPA_FONTDIR") or ("/usr/share/fonts/truetype/dejavu" if os.path.isdir("/usr/share/fonts/truetype/dejavu") else None)
+
 import cv2
+
+if _FONTDIR:                     # cv2's import points this at its own (empty) font dir; Qt reads it at the first window
+    os.environ["QT_QPA_FONTDIR"] = _FONTDIR
 import mujoco
 import mujoco.viewer
 import numpy as np
 
 from . import config as config_mod
-from .calibration import Calibration
+from .calibration import load_set, save_set
 from .sim import Controller, build_sim
 from .status import draw_panel
 from .tracking import VisionSystem
 
 WIN = "LiveHand-G1 camera (focus this window for keys)"
-KEYS = {ord("e"): "enable", 32: "estop", ord("n"): "cal_neutral", ord("o"): "cal_open", ord("f"): "cal_fist",
-        ord("p"): "cal_pinch", ord("r"): "orient", ord("g"): "hand", ord("h"): "home", ord("s"): "save",
+KEYS = {ord("e"): "enable", 32: "estop", ord("n"): "cal_neutral", ord("m"): "cal_range", ord("o"): "cal_open", ord("f"): "cal_fist",
+        ord("p"): "cal_pinch", ord("c"): "cal_switch", ord("r"): "orient", ord("g"): "hand", ord("h"): "home", ord("s"): "save",
         ord("l"): "load", ord("q"): "quit", 27: "quit"}
 
 
@@ -27,6 +38,8 @@ def dispatch(ctrl, action, cal_path, quit_flag):
         ctrl.enable()
     elif action == "estop":
         ctrl.estop()
+    elif action == "cal_switch":
+        ctrl.switch_cal_side()
     elif action.startswith("cal_"):
         ctrl.calibrate(action[4:])
     elif action == "orient":
@@ -36,12 +49,13 @@ def dispatch(ctrl, action, cal_path, quit_flag):
     elif action == "home":
         ctrl.home()
     elif action == "save":
-        ctrl.cal.save(cal_path)
+        save_set(cal_path, {s: sd.cal for s, sd in ctrl.sides.items()})
         ctrl.say(f"calibration saved to {cal_path.name}")
     elif action == "load":
         if cal_path.exists():
-            new = Calibration.load(cal_path)
-            ctrl.cal.__dict__.update(new.__dict__)
+            for s, c in load_set(cal_path, ctrl.side_names).items():
+                ctrl.sides[s].cal.update_from(c)
+            ctrl.cal_side = next((s for s in ctrl.side_names if not ctrl.cal_complete(s)), ctrl.cal_side)
             ctrl.say("calibration loaded")
         else:
             ctrl.say("no saved calibration")
@@ -52,6 +66,8 @@ def dispatch(ctrl, action, cal_path, quit_flag):
 def parse(argv):
     ap = argparse.ArgumentParser(prog="python -m livehand", description=__doc__)
     ap.add_argument("--config", help="TOML overriding livehand/config.toml")
+    ap.add_argument("--robot", choices=["inspire", "dex3"], help="robot hands: inspire = 5-finger (default), dex3 = 3-finger")
+    ap.add_argument("--hands", choices=["both", "right", "left"], help="which arms to drive (default both; dex3: right)")
     ap.add_argument("--source", choices=["camera", "synthetic"], help="override camera.source")
     ap.add_argument("--camera", help="camera index or video file path (override camera.device)")
     ap.add_argument("--width", type=int); ap.add_argument("--height", type=int)
@@ -69,9 +85,11 @@ def run_vision_only(cfg, args):
     try:
         while not quit_flag and (not args.duration or time.time() - t0 < args.duration):
             _, frame = vis.frame_box.get()
-            seq, st = vis.state_box.get()
+            seq, pk = vis.state_box.get()
             if frame is not None and not args.no_preview:
-                txt = f"cam {vis.cam_fps.v:4.1f} fps  infer {vis.inf_fps.v:4.1f} fps  hand {'YES' if st is not None and st.tracked else 'no'}"
+                seen = [f"{s} YES" if st.tracked else f"{s} no" for s, st in (pk or {}).items()]
+                txt = (f"cam {vis.cam_fps.v:4.1f} fps  infer {vis.inf_fps.v:4.1f} fps ({vis.inf_ms:.0f} ms)  "
+                       f"{'  '.join(seen) or 'no hand'}  (q quits)")
                 out = frame.copy()
                 cv2.putText(out, txt + (f"  ERR {vis.error}" if vis.error else ""), (8, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1)
                 cv2.imshow(WIN, out)
@@ -96,18 +114,26 @@ def main(argv=None):
     if args.camera is not None: over.setdefault("camera", {})["device"] = args.camera
     if args.width: over.setdefault("camera", {})["width"] = args.width
     if args.height: over.setdefault("camera", {})["height"] = args.height
+    if args.robot: over.setdefault("robot", {})["model"] = args.robot
+    if args.hands: over.setdefault("robot", {})["sides"] = ["right", "left"] if args.hands == "both" else [args.hands]
     cfg = config_mod.load(args.config, over)
+    if not config_mod.active_sides(cfg):
+        print(f"ERROR: robot {cfg.robot.model!r} cannot drive {cfg.robot.sides} (dex3 has the right arm wired only)", file=sys.stderr)
+        return 2
     if args.vision_only:
         return run_vision_only(cfg, args)
 
-    m, d, info = build_sim()
+    m, d, info = build_sim(cfg)
     vis = VisionSystem(cfg)
     cal_path = config_mod.PKG / cfg.calibration.file
-    cal = Calibration.load(cal_path) if cal_path.exists() else Calibration()
-    ctrl = Controller(m, d, info, cfg, vis.state_box.get, calibration=cal)
-    print(f"model: {m.nbody} bodies, {m.nu} actuators, dt={m.opt.timestep}; arm joints/hand actuators wired; "
+    sides = config_mod.active_sides(cfg)
+    cals = load_set(cal_path, sides) if cal_path.exists() else {}
+    ctrl = Controller(m, d, info, cfg, vis.state_box.get, calibration=cals)
+    print(f"robot: {cfg.robot.model}, arms: {', '.join(sides)}; {m.nu} actuators, dt={m.opt.timestep}; "
           f"mirroring DISABLED until you press 'e' (after calibrating neutral with 'n')", flush=True)
-    print(f"source={cfg.camera.source} device={cfg.camera.device}; calibration {'loaded' if cal.has_neutral else 'not found'}", flush=True)
+    loaded = [s for s, c in cals.items() if c.has_neutral]
+    print(f"source={cfg.camera.source} device={cfg.camera.device}; calibration "
+          f"{'loaded for ' + ', '.join(loaded) if loaded else 'not found'}", flush=True)
     vis.start()
 
     quit_flag = []
@@ -117,8 +143,8 @@ def main(argv=None):
     on_key = lambda code: key_q.append(viewer_keys[code]) if code in viewer_keys else None
     viewer = None if args.no_viewer else mujoco.viewer.launch_passive(m, d, key_callback=on_key)
     if viewer is not None:
-        site = mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_SITE, cfg.arm.site)
-        viewer.cam.lookat[:] = d.site_xpos[site]; viewer.cam.distance, viewer.cam.azimuth, viewer.cam.elevation = 1.4, 150, -15
+        viewer.cam.lookat[:] = np.mean([d.site_xpos[sd.ik.site] for sd in ctrl.sides.values()], 0)
+        viewer.cam.distance, viewer.cam.azimuth, viewer.cam.elevation = 1.4 + 0.3 * (len(sides) > 1), 160, -15
 
     dt = m.opt.timestep
     n_ctrl = max(1, round(1.0 / cfg.sim.control_hz / dt))
@@ -146,7 +172,7 @@ def main(argv=None):
                 _, frame = vis.frame_box.get()
                 if frame is None:
                     frame = np.zeros((cfg.camera.height, cfg.camera.width, 3), np.uint8)
-                cv2.imshow(WIN, draw_panel(frame, ctrl.status(), vis.cam_fps.v, vis.inf_fps.v, vis.error))
+                cv2.imshow(WIN, draw_panel(frame, ctrl.status(), vis.cam_fps.v, vis.inf_fps.v, vis.error, vis.inf_ms))
                 k = cv2.waitKey(1) & 0xFF
                 if k in KEYS:
                     key_q.append(KEYS[k])
@@ -162,7 +188,8 @@ def main(argv=None):
         if viewer is not None:
             viewer.close()
         cv2.destroyAllWindows()
+        lat = (f"latency median {st['latency_ms_median']:.0f} ms p95 {st['latency_ms_p95']:.0f} ms (capture->command)"
+               if np.isfinite(st["latency_ms_median"]) else "latency n/a (no hand was tracked)")
         print(f"shutdown: vision threads {'stopped' if ok else 'STILL RUNNING'}, camera released={vis.cap is None}, "
-              f"sim_time={d.time:.1f}s, latency median {st['latency_ms_median']:.0f} ms p95 {st['latency_ms_p95']:.0f} ms "
-              f"(capture->command)", flush=True)
+              f"sim_time={d.time:.1f}s, {lat}", flush=True)
     return 0

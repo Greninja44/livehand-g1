@@ -33,8 +33,9 @@ def hand_joint(side, name):
     return f"{side}_{name}_joint"
 
 
-def build(stand=None):
-    """Return (model, data, info) with data reset to the standing pose, hands open, ctrl = held targets."""
+def build(stand=None, edit=None):
+    """Return (model, data, info) with data reset to the standing pose, hands open, ctrl = held targets.
+    edit: optional callable(spec) applied just before compiling (e.g. to add sites); default changes nothing."""
     men = mujoco.MjModel.from_xml_path(str(MENAGERIE))
     men_gain = {}
     for i in range(men.nu):
@@ -90,6 +91,8 @@ def build(stand=None):
         a.ctrllimited = True
         a.ctrlrange = [j.range[0], j.range[1]]
 
+    if edit is not None:
+        edit(spec)
     m = spec.compile()
     d = mujoco.MjData(m)
     pose = {**STAND, **(stand or {})}
