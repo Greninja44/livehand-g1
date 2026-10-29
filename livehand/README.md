@@ -5,8 +5,8 @@ calibration + retargeting -> bounded IK per arm and a gesture mapper per hand ->
 
 | `--robot` | scene | hands | arms driven |
 |---|---|---|---|
-| `inspire` (default) | `scripts/inspire_scene.py`: G1 29-DoF from Unitree's URDF + **5-finger Inspire RH56DFQ** hands | 6 actuators/hand (thumb yaw + pitch, index, middle, ring, pinky; 6 more joints coupled) | **right and left** |
-| `dex3` | `scripts/grasp_scene.py`: Menagerie G1 + 3-finger Dex3-1 hands | 7 actuators/hand | right |
+| `inspire` (default) | `robots/inspire_scene.py`: G1 29-DoF from Unitree's URDF + **5-finger Inspire RH56DFQ** hands | 6 actuators/hand (thumb yaw + pitch, index, middle, ring, pinky; 6 more joints coupled) | **right and left** |
+| `dex3` | `robots/grasp_scene.py`: Menagerie G1 + 3-finger Dex3-1 hands | 7 actuators/hand | right |
 
 Your right hand drives the robot's right arm and hand; your left hand drives the left.
 
@@ -37,7 +37,7 @@ The existing `.venv-livehand` (Python 3.14.4, created with `python3 -m venv`) al
 installing. MediaPipe 1.2.0, MuJoCo 3.17.0, opencv-contrib-python 5.0.0.93 and NumPy 2.5.4 all support Python 3.14.
 To recreate it on a fresh machine (exact pins in `requirements-livehand.txt`):
 ```bash
-cd ~/chess2bot
+cd livehand-g1            # repo root
 python3 -m venv .venv-livehand
 .venv-livehand/bin/pip install -r requirements-livehand.txt
 mkdir -p livehand/models && curl -fsSL -o livehand/models/hand_landmarker.task \
@@ -47,7 +47,7 @@ Do not install `opencv-python` next to `opencv-contrib-python` (they overwrite e
 
 ## Run
 ```bash
-cd ~/chess2bot
+cd livehand-g1            # repo root
 .venv-livehand/bin/python -m livehand.tools.camera_check     # diagnose: devices, fps, MediaPipe detection (no windows)
 .venv-livehand/bin/python -m livehand --vision-only          # camera-only mode: mirrored preview + 21-landmark skeleton
 .venv-livehand/bin/python -m livehand                        # full teleoperation: 5-finger G1, both hands
@@ -164,7 +164,7 @@ fingertip gap R / L; fist = fingers at 90%, thumb clear; no new self-penetration
 joints hit their limits there).
 **Inspire model fix.** The URDF's thumb-base meshes overlap the palm by 3-5 mm at rest; that contact fought the thumb
 (pitch target 0.45 reached 0.38). LiveHand excludes just that pair (thumb base/proximal vs. hand base), after which the thumb
-tracks exactly; all other hand contacts stay on. `scripts/inspire_scene.py` gained an optional `edit` hook for this; its
+tracks exactly; all other hand contacts stay on. `robots/inspire_scene.py` gained an optional `edit` hook for this; its
 default output is unchanged.
 
 ## Safety behaviour

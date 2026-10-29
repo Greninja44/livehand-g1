@@ -11,8 +11,9 @@ import mujoco
 import mujoco.viewer
 import numpy as np
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))   # repo root, for robots/
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-import grasp_scene as gs  # noqa: E402
+from robots import grasp_scene as gs  # noqa: E402
 from test_chess_grasp import CONFIG as C  # noqa: E402
 
 

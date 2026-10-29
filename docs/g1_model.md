@@ -79,14 +79,14 @@ I could not literally watch the live window from this CLI session. "Viewer works
 - Offscreen `Renderer` is limited to 640x480 unless the XML sets `<visual><global offwidth= offheight=/>`.
 - If no window opens: confirm `DISPLAY` is set, run `wsl --update` from Windows, and restart WSL.
 
-## 5-finger Inspire hands (`scripts/inspire_scene.py`)
+## 5-finger Inspire hands (`robots/inspire_scene.py`)
 - Source: Unitree's official URDF `g1_29dof_rev_1_0_with_inspire_hand_DFQ.urdf` from
   [unitreerobotics/unitree_ros](https://github.com/unitreerobotics/unitree_ros) (BSD-3-Clause), sparse-cloned into
   `models/unitree_ros_probe/src` (git-ignored; see "Setup from scratch" in the main README).
 - The URDF has no actuators, free base, floor, damping or armature; `inspire_scene.build()` adds them with `MjSpec`: body
   position actuators with the same gains as Menagerie's G1, and per hand 6 finger position actuators (thumb yaw, thumb
   pitch, index, middle, ring, pinky). The other 6 finger joints follow through the URDF mimic constraints.
-- `scripts/test_inspire_actuation.py` (`logs/inspire_actuation.json`): 9/12 single-actuator checks pass on the default
+- `experiments/test_inspire_actuation.py` (`logs/inspire_actuation.json`): 9/12 single-actuator checks pass on the default
   scene; the 3 failures are the thumb. Cause (verified later): the thumb-base meshes overlap the palm by 3-5 mm at rest and
   that contact fights the thumb actuators. LiveHand builds the scene with that one contact pair excluded (via the optional
   `edit` hook of `build()`), after which the thumb tracks exactly; the default scene is unchanged.

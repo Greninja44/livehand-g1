@@ -1,8 +1,9 @@
-"""Lightweight checks for scripts/map_grasp_region.py (grid, symmetry, ordering, classification, aggregation).
-Run: python scripts/test_map_grasp_region.py   (no viewer; one scene build for the clearance check)"""
+"""Lightweight checks for experiments/map_grasp_region.py (grid, symmetry, ordering, classification, aggregation).
+Run: python experiments/test_map_grasp_region.py   (no viewer; one scene build for the clearance check)"""
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))   # repo root, for robots/
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import map_grasp_region as mg  # noqa: E402
 import test_chess_grasp as tcg  # noqa: E402

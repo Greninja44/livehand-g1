@@ -1,8 +1,8 @@
 """MuJoCo side: model construction (reusing the project's scenes) and the live Controller.
 
 Two robot models (config `[robot].model`):
-  inspire  G1 29-DoF + 5-finger Inspire RH56DFQ hands (scripts/inspire_scene.py, Unitree URDF), both arms
-  dex3     Menagerie G1 + 3-finger Dex3-1 hands (scripts/grasp_scene.py), right arm only
+  inspire  G1 29-DoF + 5-finger Inspire RH56DFQ hands (robots/inspire_scene.py, Unitree URDF), both arms
+  dex3     Menagerie G1 + 3-finger Dex3-1 hands (robots/grasp_scene.py), right arm only
 
 The Controller is a plain object (no threads, no viewer): `update(now, dt)` consumes the newest hand packet from a
 `get_state` callable and writes d.ctrl. A packet is a dict {"right": HandState, "left": HandState} (either may be
@@ -24,9 +24,9 @@ from .retarget import HandRetargeter, _rotvec, exp_rot, map_orientation, map_pos
 from .safety import Limiter, Mode, Watchdog
 
 ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(ROOT / "scripts"))
-import grasp_scene as gs  # noqa: E402  (existing project module: Menagerie G1 + Dex3-1 hands, validated arm-forward pose)
-import inspire_scene as isc  # noqa: E402  (existing project module: G1 + Inspire hands from Unitree's URDF)
+sys.path.insert(0, str(ROOT))   # for robots/
+from robots import grasp_scene as gs  # noqa: E402  (project module: Menagerie G1 + Dex3-1 hands, validated arm-forward pose)
+from robots import inspire_scene as isc  # noqa: E402  (project module: G1 + Inspire hands from Unitree's URDF)
 
 ARM_JOINTS = ("shoulder_pitch", "shoulder_roll", "shoulder_yaw", "elbow", "wrist_roll", "wrist_pitch", "wrist_yaw")
 HAND_JOINTS = ("thumb_0", "thumb_1", "thumb_2", "index_0", "index_1", "middle_0", "middle_1")    # Dex3-1

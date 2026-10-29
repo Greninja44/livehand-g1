@@ -10,8 +10,8 @@ from pathlib import Path
 import mujoco
 import numpy as np
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "scripts"))
-import grasp_scene as gs  # noqa: E402
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))   # repo root, for robots/
+from robots import grasp_scene as gs  # noqa: E402
 
 SIDE = "right"
 H = [f"{SIDE}_hand_{n}_joint" for n in ("thumb_0", "thumb_1", "thumb_2", "index_0", "index_1", "middle_0", "middle_1")]
