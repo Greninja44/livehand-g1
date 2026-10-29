@@ -1,8 +1,8 @@
 # LiveHand-G1 configuration. All lengths in metres, angles in radians unless the key says deg.
 
 [robot]
-model = "inspire"        # "inspire": G1 + 5-finger Inspire RH56DFQ hands (both arms; scripts/inspire_scene.py)
-                         # "dex3":    Menagerie G1 + 3-finger Dex3-1 hands (right arm only; scripts/grasp_scene.py)
+model = "inspire"        # "inspire": G1 + 5-finger Inspire RH56DFQ hands (both arms; robots/inspire_scene.py)
+                         # "dex3":    Menagerie G1 + 3-finger Dex3-1 hands (right arm only; robots/grasp_scene.py)
 sides = ["right", "left"]   # robot arms to drive; your right hand drives the robot's right arm. Sides the model
                             # does not support are ignored (dex3: right only).
 

@@ -8,8 +8,9 @@ import mujoco
 import mujoco.viewer
 import numpy as np
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))   # repo root, for robots/
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-import inspire_scene as sc  # noqa: E402
+from robots import inspire_scene as sc  # noqa: E402
 
 
 def main():

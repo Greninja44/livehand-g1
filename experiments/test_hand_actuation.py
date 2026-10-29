@@ -12,9 +12,10 @@ from pathlib import Path
 import mujoco
 import numpy as np
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))   # repo root, for robots/
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from render_util import save_png  # noqa: E402
-import grasp_scene as gs  # noqa: E402
+from robots.render_util import save_png  # noqa: E402
+from robots import grasp_scene as gs  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 SCENE = ROOT / "models" / "mujoco_menagerie" / "unitree_g1" / "scene_with_hands.xml"

@@ -1,6 +1,6 @@
 """Map where the scripted G1 right-Dex3-1 pawn grasp succeeds, as a function of pawn placement.
 
-Every trial replays the *exact* baseline sequence from scripts/test_chess_grasp.py (same arm pose, open-hand
+Every trial replays the *exact* baseline sequence from experiments/test_chess_grasp.py (same arm pose, open-hand
 pose, closing targets, lift and 1.0 s hold; no per-trial optimisation). Only the pawn pose changes:
 
   dx  [mm]  offset along the right-wrist x axis (the direction the fingers point; = world +x, forward)
@@ -18,8 +18,8 @@ contact after closure) | lift_failure (never rose >= 30 mm) | hold_failure (rose
 the baseline test failed) | sim_error (exception, non-finite state, joint-limit or balance violation).
 
 Examples:
-  python scripts/map_grasp_region.py                 # quick grid
-  python scripts/map_grasp_region.py --full          # +-3/6/9 mm, yaw 0/+-15/+-30/+-45 (343 trials)
+  python experiments/map_grasp_region.py                 # quick grid
+  python experiments/map_grasp_region.py --full          # +-3/6/9 mm, yaw 0/+-15/+-30/+-45 (343 trials)
 """
 import argparse
 import csv
@@ -31,6 +31,7 @@ from pathlib import Path
 
 import numpy as np
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))   # repo root, for robots/
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import test_chess_grasp as tcg  # noqa: E402
 

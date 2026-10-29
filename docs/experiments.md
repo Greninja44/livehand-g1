@@ -20,7 +20,7 @@ Goal: show that the G1 right hand can **physically** grasp and lift a pawn-sized
 - Snapshots: `logs/grasp_init.png`, `logs/grasp_closed.png`, `logs/grasp_final.png`; per-step command/response trace in `logs/grasp_trace.csv`.
 
 ### How it is built
-- `scripts/grasp_scene.py` builds the scene with `MjSpec` from the **unmodified** `scene_with_hands.xml`: adds a `grasp_site` on `right_wrist_yaw_link`, a table, and a free-joint pawn.
+- `robots/grasp_scene.py` builds the scene with `MjSpec` from the **unmodified** `scene_with_hands.xml`: adds a `grasp_site` on `right_wrist_yaw_link`, a table, and a free-joint pawn.
 - The right arm is moved to a pre-grasp pose by numerical IK (wrist x → world +x, z → up). The pawn is placed from **forward kinematics** of the grasp site (hand-frame x=0.145, y=0.045 m), table top 5 mm below the pawn base so the lowest finger-hull point stays clear.
 - The lift is a second IK solution 50 mm higher, interpolated over 1.5 s.
 - The closing targets and pawn position were found by an **offline random search** with constraints (start clearance ≥ 2 mm) and then checked for robustness (12/12 under ±3 mm pawn position and ±0.05 rad target noise). The first search lacked the clearance constraint and produced a grasp that started with a 2.3 mm penetration of thumb_2; the test caught this and the search was redone. So these numbers are tuned to this scene; they are not a general grasp.
@@ -28,9 +28,9 @@ Goal: show that the G1 right hand can **physically** grasp and lift a pawn-sized
 ### Run
 ```bash
 export MUJOCO_GL=glfw GALLIUM_DRIVER=d3d12 MESA_D3D12_DEFAULT_ADAPTER_NAME=NVIDIA   # snapshots (see Troubleshooting)
-python scripts/test_hand_actuation.py --pose pregrasp --screenshots   # 9/9 expected
-python scripts/test_hand_actuation.py --pose keyframe                 # 8/9 expected (see below)
-python scripts/test_chess_grasp.py            # add --no-render to skip PNGs; exit code 0 only if all checks pass
+python experiments/test_hand_actuation.py --pose pregrasp --screenshots   # 9/9 expected
+python experiments/test_hand_actuation.py --pose keyframe                 # 8/9 expected (see below)
+python experiments/test_chess_grasp.py            # add --no-render to skip PNGs; exit code 0 only if all checks pass
 ```
 
 ### Hand actuation findings (`logs/hand_actuation_*.json`)
@@ -47,17 +47,17 @@ Each of the seven right-hand actuators was commanded individually to 50% of each
 - Simulated friction/mass values are assumptions. No sim-to-real claims.
 
 
-## Experiment: grasp-region mapping (`scripts/map_grasp_region.py`)
+## Experiment: grasp-region mapping (`experiments/map_grasp_region.py`)
 
 Measures where the **fixed, scripted** baseline grasp works as the pawn pose varies. Each trial is a fresh build and reset that replays the exact `test_chess_grasp.py` sequence (same arm pose, open-hand pose, closing targets, lift, 1.0 s hold). Nothing is re-optimised per trial; actuator gains and physics are unchanged. Only the pawn body moves, after the arm pose and table are fixed from the nominal pose (`grasp_scene.build_scene(pawn_offset_mm=..., pawn_yaw_deg=...)`).
 
 ### Run
 ```bash
 export MUJOCO_GL=glfw GALLIUM_DRIVER=d3d12 MESA_D3D12_DEFAULT_ADAPTER_NAME=NVIDIA
-python scripts/map_grasp_region.py                    # quick: dx,dy in -6..6 step 3 mm, yaw -30/0/30 = 75 trials (~1.5 min)
-python scripts/map_grasp_region.py --full --out-dir logs/grasp_region_full   # +-9 mm, yaw 0..+-45 step 15 = 343 trials (~7 min)
+python experiments/map_grasp_region.py                    # quick: dx,dy in -6..6 step 3 mm, yaw -30/0/30 = 75 trials (~1.5 min)
+python experiments/map_grasp_region.py --full --out-dir logs/grasp_region_full   # +-9 mm, yaw 0..+-45 step 15 = 343 trials (~7 min)
 # custom: --x-offsets-mm -6,0,6 --y-offsets-mm ... --yaws-deg ... --repeats 3 --shuffle --seed 1 --min-clearance-mm 2
-python scripts/test_map_grasp_region.py               # lightweight checks (grid, symmetry, ordering, classification, aggregation, clearance)
+python experiments/test_map_grasp_region.py               # lightweight checks (grid, symmetry, ordering, classification, aggregation, clearance)
 ```
 A baseline gate (nominal grasp + open-finger control) runs first; if it fails the sweep aborts with an error. Outputs go under `logs/` (`--out-dir`): `grasp_region_trials.csv` (one row per trial), `grasp_region_summary.json`, `grasp_region_summary.txt` (grids per yaw), `grasp_region_map.png` (PIL heat-map, no plotting dependency).
 

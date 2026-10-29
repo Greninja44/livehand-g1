@@ -8,9 +8,10 @@ from pathlib import Path
 import mujoco
 import numpy as np
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))   # repo root, for robots/
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-import inspire_scene as sc  # noqa: E402
-from render_util import save_png  # noqa: E402
+from robots import inspire_scene as sc  # noqa: E402
+from robots.render_util import save_png  # noqa: E402
 
 MIMIC = {"thumb_proximal_pitch": [("thumb_intermediate", 1.6), ("thumb_distal", 2.4)],
          "index_proximal": [("index_intermediate", 1.0)], "middle_proximal": [("middle_intermediate", 1.0)],

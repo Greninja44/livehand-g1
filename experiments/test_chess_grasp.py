@@ -15,9 +15,10 @@ from pathlib import Path
 import mujoco
 import numpy as np
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))   # repo root, for robots/
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-import grasp_scene as gs  # noqa: E402
-from render_util import save_png  # noqa: E402
+from robots import grasp_scene as gs  # noqa: E402
+from robots.render_util import save_png  # noqa: E402
 
 LOGS = gs.ROOT / "logs"
 
@@ -35,7 +36,7 @@ nm = lambda m, t, i: mujoco.mj_id2name(m, t, i)
 
 
 def trial_checks(met):
-    """Per-trial pass/fail checks (the success definition shared with scripts/map_grasp_region.py)."""
+    """Per-trial pass/fail checks (the success definition shared with experiments/map_grasp_region.py)."""
     c = CONFIG
     return dict(
         finite_state=not met["nonfinite_state"],
