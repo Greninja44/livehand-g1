@@ -6,5 +6,4 @@ models/mujoco_menagerie/
 livehand/calibration.json
 livehand/models/hand_landmarker.task
 models/unitree_ros_probe/
-__pycache__/
 logs/hand_clip/
